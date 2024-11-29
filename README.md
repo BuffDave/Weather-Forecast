@@ -1,14 +1,38 @@
-Weather Forecast Website 🌦️
-A weather forecast website that delivers real-time and 5-day weather updates for locations worldwide, powered by the free plan of the OpenWeather API.
+# Weather Forecast Website 🌤️
 
-🌟 Features
-Current Weather: View up-to-date temperature, humidity, wind speed, and more.
-5-Day Forecast: Check detailed weather predictions for the next five days.
-Search Locations: Easily search for cities or locations around the world.
-Responsive Design: Optimized for use on desktop, tablet, and mobile devices.
-Dynamic Weather Icons: Interactive icons and visuals that reflect real-time conditions.
+A user-friendly weather forecast website that provides real-time and future weather updates for locations worldwide. This project utilizes modern web development tools and APIs to deliver accurate and dynamic weather data.
 
-🛠️ Tech Stack
-Frontend: HTML, CSS, JavaScript
-API: OpenWeather API (Free Plan)
-Deployment: GitHub Pages, Netlify, or Vercel
+---
+
+## 🌟 Features
+
+- **Current Weather**: View up-to-date temperature, humidity, wind speed, and more.
+- **5-Day Forecast**: Check detailed weather predictions for the next five days.
+- **Search Locations**: Easily search for cities or locations around the world.
+- **Responsive Design**: Optimized for use on desktop, tablet, and mobile devices.
+- **Dynamic Weather Icons**: Interactive icons and visuals that reflect real-time conditions.
+
+---
+
+## 🛠️ Tech Stack
+
+- **Frontend**: HTML, CSS, JavaScript
+- **Backend**: Node.js
+- **API**: OpenWeather API
+- **Styling**: Bootstrap 
+- **Deployment**: Vercel
+
+---
+
+## 📝 License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+---
+
+## 📧 Contact
+
+For any questions or feedback, feel free to reach out:
+
+- **Email**: arinodavejoshua@gmail.com  
+- **GitHub**: [@BuffDave](https://github.com/BuffDave)
