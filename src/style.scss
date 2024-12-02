@@ -14,12 +14,29 @@ html, body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 50%;
+  width: 60%;
   @media screen and (max-width: $large) {
     width: 100%;
   }
 }
 
+.forecast-list {
+  overflow-x: scroll;
+}
+
+.forecast-list::-webkit-scrollbar {
+  height: 10px;
+}
+
+.forecast-list::-webkit-scrollbar-track {
+  background-color: rgb(0, 0, 0, 0.15);
+  border-radius: 99px;
+}
+
+.forecast-list::-webkit-scrollbar-thumb {
+  background-color: rgb(0, 0, 0, 0.3);
+  border-radius: 99px;
+}
 
 .content {
   backdrop-filter: blur(14px);
