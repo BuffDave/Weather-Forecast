@@ -9,6 +9,10 @@ html, body {
     padding: 0;
   }
 
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23fff' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba(255, 255, 255, 1)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
 .weather-interface {
   position: absolute;
   top: 50%;
@@ -16,7 +20,9 @@ html, body {
   transform: translate(-50%, -50%);
   width: 60%;
   @media screen and (max-width: $large) {
-    width: 100%;
+    width: 100%; 
+    top: 15%; 
+    transform: translate(-50%, 0); 
   }
 }
 
@@ -99,7 +105,7 @@ html, body {
   .gradient-bg {
     width: 100vw;
     height: 100vh;
-    position: relative;
+    position: fixed;
     overflow: hidden;
     background: linear-gradient(40deg, var(--color-bg1), var(--color-bg2));
     top: 0;
