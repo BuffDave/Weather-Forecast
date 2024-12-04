@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/public/weather-favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather Forecast</title>
+  </head>
+  <body>
+    <!-- START HEADER -->
+    <header>
+      <nav class="navbar navbar-expand-sm fixed-top bg-light bg-opacity-25 py-1">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/">
+            <img src="/src/img/weather-logo.png" alt="Logo" width="30" class="d-inline-block align-middle pb-1">
+            <span class="text-white fw-light fs-6 px-2">Weather Forecast</span>
+          </a>
+          <button class="navbar-toggler border border-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse flex-grow-0" id="navbarText">
+            <ul class="navbar-nav me-auto mb-0 align-items-center">
+              <li class="nav-item px-2">
+                <a class="nav-link text-white fw-light fs-6" aria-current="page" href="https://github.com/BuffDave/Weather-Forecast">Github</a>
+              </li>
+              <li class="nav-item px-2">
+                <a class="nav-link active text-white fs-6" href="about.html">About</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <!-- END HEADER -->
+
+    <!-- START MAIN -->
+    <main>
+      <!-- START BACKGROUND -->
+      <section>
+        <div class="gradient-bg">
+          <svg xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <filter id="goo">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
+                <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -8" result="goo" />
+                <feBlend in="SourceGraphic" in2="goo" />
+              </filter>
+            </defs>
+          </svg>
+          <!-- <div class="gradients-container">
+            <div class="g1"></div>
+            <div class="g2"></div>
+            <div class="g3"></div>
+            <div class="g4"></div>
+            <div class="g5"></div>
+            <div class="interactive"></div>
+          </div> -->
+        </div>
+      </section>
+      <!-- END BACKGROUND -->
+
+      <section>
+        
+      </section>
+
+    </main>
+    <!-- END MAIN -->
+
+    <footer>
+      
+    </footer>
+
+    <!-- START SCRIPT -->
+    <script type="module" src="/src/main.js"></script>
+    <!-- END SCRIPT -->
+  </body>
+</html>

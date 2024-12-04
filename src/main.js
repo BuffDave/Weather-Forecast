@@ -1,4 +1,5 @@
 import './style.scss'
+import 'bootstrap';
 
 document.addEventListener('DOMContentLoaded', () => {
   const interBubble = document.querySelector('.interactive');
