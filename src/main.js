@@ -1,38 +1,39 @@
 import './style.scss'
 import 'bootstrap';
 
-// START BACKGROUND
-document.addEventListener('DOMContentLoaded', () => {
-  const interBubble = document.querySelector('.interactive');
-  let curX = 0;
-  let curY = 0;
-  let tgX = 0;
-  let tgY = 0;
+// // START BACKGROUND
+// document.addEventListener('DOMContentLoaded', () => {
+//   const interBubble = document.querySelector('.interactive');
+//   let curX = 0;
+//   let curY = 0;
+//   let tgX = 0;
+//   let tgY = 0;
 
-  function move() {
-      curX += (tgX - curX) / 20;
-      curY += (tgY - curY) / 20;
-      interBubble.style.transform = `translate(${Math.round(curX)}px, ${Math.round(curY)}px)`;
-      requestAnimationFrame(() => {
-          move();
-      });
-  }
+//   function move() {
+//       curX += (tgX - curX) / 20;
+//       curY += (tgY - curY) / 20;
+//       interBubble.style.transform = `translate(${Math.round(curX)}px, ${Math.round(curY)}px)`;
+//       requestAnimationFrame(() => {
+//           move();
+//       });
+//   }
 
-  window.addEventListener('mousemove', (event) => {
-      tgX = event.clientX;
-      tgY = event.clientY;
-  });
+//   window.addEventListener('mousemove', (event) => {
+//       tgX = event.clientX;
+//       tgY = event.clientY;
+//   });
 
-  move();
-});
+//   move();
+// });
 // END BACKGROUND
 
 //START SEARCH BUTTON
 const cityInput = document.querySelector('.city-input')
 const searchBtn = document.querySelector('.search-btn')
+
+const weatherInfoSection = document.querySelector('.weather-info')
 const notFoundSection = document.querySelector('.not-found')
 const searchCitySection = document.querySelector('.search-city')
-const weatherInfoSection = document.querySelector('.weather-info')
 
 const apiKey = 'ee7089e7c05d2b258d69593628d21292'
 
@@ -70,9 +71,15 @@ async function updateWeatherInfo(city) {
         showDisplaySection(notFoundSection)
         return
     }
+    console.log(weatherData)
+
+    showDisplaySection(weatherInfoSection)
 }
 
-function showDisplaySection(section) {
+function showDisplaySection(sectionToDisplay) {
+    [weatherInfoSection, searchCitySection, notFoundSection]
+    .forEach(section => section.style.setProperty('display', 'none', 'important'));
 
+    sectionToDisplay.style.setProperty('display', 'flex', 'important');
 }
 //END SEARCH BUTTON
