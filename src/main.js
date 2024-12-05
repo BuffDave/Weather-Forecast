@@ -30,6 +30,9 @@ document.addEventListener('DOMContentLoaded', () => {
 //START SEARCH BUTTON
 const cityInput = document.querySelector('.city-input')
 const searchBtn = document.querySelector('.search-btn')
+const notFoundSection = document.querySelector('.not-found')
+const searchCitySection = document.querySelector('.search-city')
+const weatherInfoSection = document.querySelector('.weather-info')
 
 const apiKey = 'ee7089e7c05d2b258d69593628d21292'
 
@@ -53,7 +56,7 @@ cityInput.addEventListener('keydown', (event) => {
 })
 
 async function getFetchData(endPoint, city) {
-    const apiUrl = `https://api.openweathermap.org/data/2.5/${endPoint}?q=${city}&appid=${apiKey}`
+    const apiUrl = `https://api.openweathermap.org/data/2.5/${endPoint}?q=${city}&appid=${apiKey}&units=metric`
 
     const response = await fetch(apiUrl)
 
@@ -62,6 +65,14 @@ async function getFetchData(endPoint, city) {
 
 async function updateWeatherInfo(city) {
     const weatherData = await getFetchData('weather', city)
-    console.log(weatherData)
+    
+    if (weatherData.cod != 200) {
+        showDisplaySection(notFoundSection)
+        return
+    }
+}
+
+function showDisplaySection(section) {
+
 }
 //END SEARCH BUTTON
