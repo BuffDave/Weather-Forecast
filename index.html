@@ -73,24 +73,40 @@
                     <img src="/src/img/icon-search.png" alt="search icon" width="25">
                   </button>
                 </div>
-                <div class="location-date">
-                  <div class="row">
-                    <div class="col">
-                      <div class="d-flex justify-content-between align-items-center pb-3 pt-4">
-                        <p class="fs-5 location"><span><img class="pb-1 me-2" src="/src/img/icon-location.png" alt="location icon" width="25"></span>Masinloc</p>
-                        <p class="fw-lighter fs-6 date">Mon, 02 Dec</p>
+                <div class="search-city d-flex flex-column justify-content-center align-items-center">
+                  <img class="py-4" src="/src/img/search-result.svg" alt="no search result icon" width="200">
+                  <div class="text-center">
+                    <h4>Search City</h4>
+                    <p class="m-0 fw-light">Found out the weather conditions of the city</p>
+                  </div>
+                </div>
+                <div class="not-found d-none d-flex flex-column justify-content-center align-items-center">
+                  <img class="py-4" src="/src/img/not-found.svg" alt="no search result icon" width="200">
+                  <div class="text-center">
+                    <h4>Not Found</h4>
+                    <p class="m-0 fw-light">We couldn't find the weather details for the city. Please check the spelling or try another location.</p>  
+                  </div>
+                </div>
+                <div class="weather-info d-none">
+                  <div class="location-date">
+                    <div class="row">
+                      <div class="col">
+                        <div class="d-flex justify-content-between align-items-center pb-3 pt-4">
+                          <p class="fs-5 location"><span><img class="pb-1 me-2" src="/src/img/icon-location.png" alt="location icon" width="25"></span>Masinloc</p>
+                          <p class="fw-lighter fs-6 date">Mon, 02 Dec</p>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                <div class="logo-temperature">
-                  <div class="row">
-                    <div class="col">
-                      <div class="d-flex justify-content-between pb-3">
-                        <img src="/src/img/weather-condition.png" alt="weather logo" width="150">
-                        <div class="d-flex flex-column my-auto">
-                          <p class="m-0 fs-2 fw-semibold temperature">29 °C</p>
-                          <p class="fw-lighter m-0 weather">Clouds</p>
+                  <div class="logo-temperature">
+                    <div class="row">
+                      <div class="col">
+                        <div class="d-flex justify-content-between pb-3">
+                          <img src="/src/img/weather-condition.png" alt="weather logo" width="150">
+                          <div class="d-flex flex-column my-auto">
+                            <p class="m-0 fs-2 fw-semibold temperature">29 °C</p>
+                            <p class="fw-lighter m-0 weather">Clouds</p>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -98,49 +114,51 @@
                 </div>
               </div>
               <div class="col-md-6">
-                <div class="humidity-windspeed">
-                  <div class="col">
-                    <div class="d-flex justify-content-between pb-2">
-                      <div class="d-flex align-items-center">
-                        <img src="/src/img/icon-water-drop.png" alt="water drop icon" class="pe-2" width="42">
-                        <div>
-                          <p class="m-0 fw-lighter">Humidity</p>
-                          <p class="m-0 fw-semibold humidity">55%</p>
+                <div class="weather-info d-none">
+                  <div class="humidity-windspeed">
+                    <div class="col">
+                      <div class="d-flex justify-content-between pb-2">
+                        <div class="d-flex align-items-center">
+                          <img src="/src/img/icon-water-drop.png" alt="water drop icon" class="pe-2" width="42">
+                          <div>
+                            <p class="m-0 fw-lighter">Humidity</p>
+                            <p class="m-0 fw-semibold humidity">55%</p>
+                          </div>
                         </div>
-                      </div>
-                      <div class="d-flex align-items-center">
-                        <img src="/src/img/icon-wind.png" alt="wind icon" class="pe-2" width="42">
-                        <div>
-                          <p class="m-0 fw-lighter">Wind Speed</p>
-                          <p class="m-0 fw-semibold wind-speed">2 M/s</p>
+                        <div class="d-flex align-items-center">
+                          <img src="/src/img/icon-wind.png" alt="wind icon" class="pe-2" width="42">
+                          <div>
+                            <p class="m-0 fw-lighter">Wind Speed</p>
+                            <p class="m-0 fw-semibold wind-speed">2 M/s</p>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                <div class="date-temperature">
-                  <div class="row">
-                    <div class="col">
-                      <div class="forecast-list d-flex pt-4 gap-3 pb-3">
-                        <div class="bg-light bg-opacity-10 rounded-4 d-flex flex-column align-items-center justify-content-center p-3">
-                          <p class="m-0 fw-lighter card-date-1">03 Dec</p>
-                          <img src="/src/img/icon-storm-with-heavy-rain.png" alt="storm with heavy rain icon" width="65" class="py-1">
-                          <p class="m-0 card-temp-1">29°C</p>
-                        </div>
-                        <div class="bg-light bg-opacity-10 rounded-4 d-flex flex-column align-items-center justify-content-center p-3">
-                          <p class="m-0 fw-lighter card-date-2">04 Dec</p>
-                          <img src="/src/img/icon-storm-with-heavy-rain.png" alt="storm with heavy rain icon" width="65" class="py-1">
-                          <p class="m-0 card-temp-2">29°C</p>
-                        </div>
-                        <div class="bg-light bg-opacity-10 rounded-4 d-flex flex-column align-items-center justify-content-center p-3">
-                          <p class="m-0 fw-lighter card-date-3">05 Dec</p>
-                          <img src="/src/img/icon-storm-with-heavy-rain.png" alt="storm with heavy rain icon" width="65" class="py-1">
-                          <p class="m-0 card-temp-3">29°C</p>
-                        </div>
-                        <div class="bg-light bg-opacity-10 rounded-4 d-flex flex-column align-items-center justify-content-center p-3">
-                          <p class="m-0 fw-lighter card-date-4">06 Dec</p>
-                          <img src="/src/img/icon-storm-with-heavy-rain.png" alt="storm with heavy rain icon" width="65" class="py-1">
-                          <p class="m-0 card-temp-4">29°C</p>
+                  <div class="date-temperature">
+                    <div class="row">
+                      <div class="col">
+                        <div class="forecast-list d-flex pt-4 gap-3 pb-3">
+                          <div class="bg-light bg-opacity-10 rounded-4 d-flex flex-column align-items-center justify-content-center p-3">
+                            <p class="m-0 fw-lighter card-date-1">03 Dec</p>
+                            <img src="/src/img/icon-storm-with-heavy-rain.png" alt="storm with heavy rain icon" width="65" class="py-1">
+                            <p class="m-0 card-temp-1">29°C</p>
+                          </div>
+                          <div class="bg-light bg-opacity-10 rounded-4 d-flex flex-column align-items-center justify-content-center p-3">
+                            <p class="m-0 fw-lighter card-date-2">04 Dec</p>
+                            <img src="/src/img/icon-storm-with-heavy-rain.png" alt="storm with heavy rain icon" width="65" class="py-1">
+                            <p class="m-0 card-temp-2">29°C</p>
+                          </div>
+                          <div class="bg-light bg-opacity-10 rounded-4 d-flex flex-column align-items-center justify-content-center p-3">
+                            <p class="m-0 fw-lighter card-date-3">05 Dec</p>
+                            <img src="/src/img/icon-storm-with-heavy-rain.png" alt="storm with heavy rain icon" width="65" class="py-1">
+                            <p class="m-0 card-temp-3">29°C</p>
+                          </div>
+                          <div class="bg-light bg-opacity-10 rounded-4 d-flex flex-column align-items-center justify-content-center p-3">
+                            <p class="m-0 fw-lighter card-date-4">06 Dec</p>
+                            <img src="/src/img/icon-storm-with-heavy-rain.png" alt="storm with heavy rain icon" width="65" class="py-1">
+                            <p class="m-0 card-temp-4">29°C</p>
+                          </div>
                         </div>
                       </div>
                     </div>
