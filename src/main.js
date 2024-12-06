@@ -156,7 +156,7 @@ function updateForecastItems(weatherData) {
     const forecastItem = `
     <div class="bg-light bg-opacity-10 rounded-4 d-flex flex-column align-items-center justify-content-center p-3">
         <p class="m-0 fw-lighter card-date-1">${dateResult}</p>
-        <img src="public/${getWeatherIcon(id)}" alt="storm with heavy rain icon" width="65" class="py-1">
+        <img src="/${getWeatherIcon(id)}" alt="storm with heavy rain icon" width="65" class="py-1">
         <p class="m-0 card-temp-1">${Math.round(temp)} °C</p>
     </div>
     `
