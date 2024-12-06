@@ -5,10 +5,11 @@
         "headers": [
           {
             "key": "Content-Security-Policy",
-            "value": "default-src 'self'; frame-src 'self' https://vercel.live; connect-src 'self' https://api.openweathermap.org; script-src 'self'; style-src 'self' https://fonts.googleapis.com 'sha256-YNhUMO14leQCuxW8o/2oUVcrCcf5XRfAYCHYBwIZ7Q0='; img-src 'self' data:; font-src 'self' https://fonts.gstatic.com; object-src 'none';"
+            "value": "default-src 'self'; frame-src 'self' https://vercel.live; connect-src 'self' https://api.openweathermap.org; script-src 'self' https://vercel.live; style-src 'self' https://fonts.googleapis.com 'sha256-YNhUMO14leQCuxW8o/2oUVcrCcf5XRfAYCHYBwIZ7Q0='; img-src 'self' data:; font-src 'self' https://fonts.gstatic.com; object-src 'none';"
           }
         ]
       }
     ]
   }
+
   
