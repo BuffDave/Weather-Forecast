@@ -18,7 +18,7 @@ A user-friendly weather forecast website that provides real-time and future weat
 ## 🛠️ Tech Stack
 
 - **Frontend**: HTML, SCSS, JavaScript, Vite
-- **Backend**: Node.js
+- **Backend**: JavaScript
 - **API**: OpenWeather API
 - **Styling**: Bootstrap 
 - **Deployment**: Vercel
