@@ -36,7 +36,8 @@ const weatherInfoSection2 = document.querySelector('.weather-info2')
 const notFoundSection = document.querySelector('.not-found')
 const searchCitySection = document.querySelector('.search-city')
 
-const countryTxt = document.querySelector('.country-text')
+const nameTxt = document.querySelector('.name-text')
+const countryTxt = document.querySelector('.country')
 const tempTxt = document.querySelector('.temp-text')
 const conditionTxt = document.querySelector('.condition-text')
 const humidityTxt = document.querySelector('.humidity-value')
@@ -105,13 +106,17 @@ async function updateWeatherInfo(city) {
     }
 
     const {
-        name: country,
+        name: name,
+        sys: { country },
         main: { temp, humidity },
         weather: [{ id, main}],
         wind: {speed}
     } = weatherData
 
-    countryTxt.textContent = country
+    console.log(weatherData)
+
+    nameTxt.textContent = name
+    countryTxt.textContent = ', ' + country
     tempTxt.textContent = Math.round (temp) + ' °C'
     conditionTxt.textContent = main
     humidityTxt.textContent = humidity + '%'
