@@ -171,11 +171,28 @@ function updateForecastItems(weatherData) {
 }
 
 function showDisplaySection(...sectionsToDisplay) {
-    [weatherInfoSection, weatherInfoSection2, searchCitySection, notFoundSection]
-    .forEach(section => section.style.setProperty('display', 'none', 'important'));
+    [weatherInfoSection, weatherInfoSection2, searchCitySection, notFoundSection].forEach(section => {
+        section.style.setProperty('display', 'none', 'important');
+    });
+
+    const searchCol = document.querySelector('.search-col');
+    if (searchCol) {
+        searchCol.style.setProperty('display', 'none', 'important');
+    }
 
     sectionsToDisplay.forEach(section => {
         section.style.setProperty('display', 'block', 'important');
+        if (section === weatherInfoSection2) {
+            if (searchCol) {
+                searchCol.style.setProperty('display', 'block', 'important');
+            }
+        }
     });
 }
 //END SEARCH BUTTON
+
+gsap.to(target, {
+    duration:2.5,
+    ease: "weather-interface.out",
+    y: -500
+    });

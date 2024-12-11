@@ -15,7 +15,7 @@
             <img src="public/weather-logo.png" alt="Logo" width="30" class="d-inline-block align-middle pb-1">
             <span class="text-white fw-light fs-6 px-2">Weather Forecast</span>
           </a>
-          <button class="navbar-toggler border border-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+          <button class="navbar-toggler border border-light text-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse flex-grow-0" id="navbarText">
@@ -47,14 +47,14 @@
               </filter>
             </defs>
           </svg>
-          <div class="gradients-container">
+          <!-- <div class="gradients-container">
             <div class="g1"></div>
             <div class="g2"></div>
             <div class="g3"></div>
             <div class="g4"></div>
             <div class="g5"></div>
             <div class="interactive"></div>
-          </div>
+          </div> -->
         </div>
       </section>
       <!-- END BACKGROUND -->
@@ -62,7 +62,7 @@
       <section>
         <div class="container weather-interface">
           <div class="content p-sm-5 p-4 mb-lg-0 mb-3">
-            <div class="row g-5">
+            <div class="row g-5 d-flex justify-content-center">
               <div class="col-md-6">
                 <div class="search-bar">
                   <input class="city-input p-2 px-3 pe-5 text-white bg-light bg-opacity-10" type="text" placeholder="Search City">
@@ -74,7 +74,7 @@
                   <img class="py-4" src="public/search-result.svg" alt="no search result icon" width="200">
                   <div class="text-center">
                     <h4>Search City</h4>
-                    <p class="m-0 fw-light">Found out the weather conditions of the city</p>
+                    <p class="fw-light">Found out the weather conditions of the city</p>
                   </div>
                 </div>
                 <div class="not-found d-flex text-center d-none flex-column justify-content-center align-items-center">
@@ -118,7 +118,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-md-6">
+              <div class="col-md-6 search-col" style="display: none;">
                 <div class="weather-info2 d-none">
                   <div class="humidity-windspeed">
                     <div class="col">
@@ -182,11 +182,15 @@
     <!-- END MAIN -->
 
     <footer>
-      
+      <div>
+        <p>dsadsa</p>
+        <h1>dasdasdas</h1>
+      </div>
     </footer>
 
     <!-- START SCRIPT -->
     <script type="module" src="/src/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
     <!-- END SCRIPT -->
   </body>
 </html>
