@@ -190,9 +190,3 @@ function showDisplaySection(...sectionsToDisplay) {
     });
 }
 //END SEARCH BUTTON
-
-gsap.to(target, {
-    duration:2.5,
-    ease: "weather-interface.out",
-    y: -500
-    });

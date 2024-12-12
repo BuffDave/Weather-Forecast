@@ -84,9 +84,38 @@
                       <p class="m-0">Responsive Design: <span class="fw-light">Optimized for use on desktop, tablet, and mobile devices.</span></p>
                     </li>
                     <li>
-                      <p class="m-0">Dynamic Weather Icons: <span class="fw-light">Interactive icons and visuals that reflect real-time conditions.</span></p>
+                      <p class="m-0">Dynamic Weather Icons: <span class="fw-light">Icons and visuals that reflect real-time conditions.</span></p>
                     </li>
                   </ul>
+                </div>
+                <div class="text-center">
+                  <button type="button" class="feedbackBtn btn btn-outline-light fs-5 border-2">Feedback</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="pop-up">
+          <div class="popup-content d-flex justify-content-center mx-2 p-4 mt-4 bg-light border border-secondary rounded-3 position-relative">
+            <div class="position-absolute top-0 end-0">
+              <button type="button" class="close btn btn-outline-secondary m-2 py-1 px-2 rounded-5" style="font-size: 10px;">X</button>
+            </div>
+            <div class="row">
+              <div class="text-center">
+                <h4 class="text-dark fw-semibold pb-1 pt-1">Drop me a Feedback</h4>
+              </div>
+              <div class="col">
+                <div class="form-group pb-2">
+                  <input type="text" name="txtName" class="form-control" placeholder="Name" value="" />
+                </div>
+                <div class="form-group pb-2">
+                  <input type="text" name="txtEmail" class="form-control" placeholder="Email" value="" />
+                </div>
+                <div class="form-group pb-2">
+                  <textarea name="txtMsg" class="form-control" placeholder="Message"></textarea>
+                </div>
+                <div class="form-group">
+                  <input type="submit" name="btnSubmit" class="btn btn-primary" value="Send Message" />
                 </div>
               </div>
             </div>
@@ -102,7 +131,16 @@
     </footer>
 
     <!-- START SCRIPT -->
-    <script type="module" src="/src/main.js"></script> 
+    <script type="module" src="src/main.js"></script>
+    <script>
+    document.querySelector(".feedbackBtn").addEventListener("click", function() {
+      document.querySelector(".pop-up").style.display = "flex";
+    })
+    document.querySelector(".close").addEventListener("click", function() {
+      document.querySelector(".pop-up").style.display = "none";
+    })
+      
+      </script>
     <!-- END SCRIPT -->
   </body>
 </html>
