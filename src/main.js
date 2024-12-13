@@ -47,6 +47,8 @@ const currentDate = document.querySelector('.current-date')
 
 const forecastItems = document.querySelector('.forecast-list')
 
+const allText = document.querySelectorAll('.name-text, .country, .humidity-value, .wind-speed-value, .temp-text, .card-temp-1, .card-date-1, .condition-text')
+
 const apiKey = import.meta.env.VITE_API_KEY;
 const apiURL = import.meta.env.VITE_API_URL;
 
@@ -115,6 +117,16 @@ async function updateWeatherInfo(city) {
 
     console.log(weatherData)
 
+    gsap.fromTo(
+        allText,
+        { opacity: 0 }, 
+        {
+            opacity: 1,
+            duration: 0.6,
+            ease: "power2.out",
+        }
+    );
+
     nameTxt.textContent = name
     countryTxt.textContent = ', ' + country
     tempTxt.textContent = Math.round (temp) + ' °C'
@@ -122,11 +134,29 @@ async function updateWeatherInfo(city) {
     humidityTxt.textContent = humidity + '%'
     windSpeedTxt.textContent = speed + ' M/s'
 
+    gsap.fromTo(
+        weatherSummaryImg,
+        { scale: 0, opacity: 0 }, 
+        {
+            scale: 1.1, 
+            opacity: 1,
+            duration: 0.6,
+            ease: "power2.out",
+            onComplete: () => {
+                gsap.to(weatherSummaryImg, {
+                    scale: 1,
+                    duration: 0.6,
+                    ease: "power2.out"
+                });
+            }
+        }
+    );
+
     currentDate.textContent = getCurrentDate()
     weatherSummaryImg.src = `/${getWeatherIcon(id)}`
 
     await updateForecastsInfo(city)
-    showDisplaySection(weatherInfoSection, weatherInfoSection2)
+    showDisplaySection(weatherInfoSection, weatherInfoSection2);
 }
 
 async function updateForecastsInfo(city) {
@@ -166,8 +196,23 @@ function updateForecastItems(weatherData) {
         <p class="m-0 card-temp-1">${Math.round(temp)} °C</p>
     </div>
     `
-
     forecastItems.insertAdjacentHTML('beforeend', forecastItem)
+    
+}
+
+function showForecastPopupAnimation() {
+    const forecastImages = document.querySelectorAll('.forecast-list img');
+
+    gsap.fromTo(
+        forecastImages,
+        { opacity: 0 },
+        {
+            opacity: 1,
+            duration: 0.5,
+            ease: 'back.out(1.7)',
+            stagger: 0.15 
+        }
+    );
 }
 
 function showDisplaySection(...sectionsToDisplay) {
@@ -188,5 +233,9 @@ function showDisplaySection(...sectionsToDisplay) {
             }
         }
     });
+
+    if (sectionsToDisplay.includes(weatherInfoSection2)) {
+        showForecastPopupAnimation();
+    }
 }
 //END SEARCH BUTTON
