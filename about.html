@@ -118,7 +118,7 @@
                 <textarea class="form-control" name="message" id="message" rows="3" required></textarea>
               </div>
 
-              <div class="h-captcha" data-sitekey="618603ec-b6e2-466c-b4f6-df860c30fc58"></div>
+              <div class="h-captcha" data-captcha="true"></div>
 
               <div id="result" class="pb-3"></div>
               <button type="submit" class="btn btn-primary">Submit</button>
@@ -137,7 +137,7 @@
     <!-- START SCRIPT -->
     <script type="module" src="src/main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
-    <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
+    <script src="https://web3forms.com/client/script.js" async defer></script>
 
     <script>
     document.querySelector(".feedbackBtn").addEventListener("click", function() {
@@ -153,51 +153,39 @@
     const result = document.getElementById('result');
 
     form.addEventListener('submit', function(e) {
-        const formData = new FormData(form);
-        e.preventDefault();
-
-        // Get hCaptcha response token
-        const captchaResponse = grecaptcha.getResponse();
-
-        if (!captchaResponse) {
-            alert('Please complete the CAPTCHA');
-            return;
-        }
-
-        // Add the CAPTCHA response token to the form data
-        formData.append('h-captcha-response', captchaResponse);
-
-        const object = Object.fromEntries(formData);
-        const json = JSON.stringify(object);
-
-        result.innerHTML = "Please wait...";
+      e.preventDefault();
+      const formData = new FormData(form);
+      const object = Object.fromEntries(formData);
+      const json = JSON.stringify(object);
+      result.innerHTML = "Please wait..."
 
         fetch('https://api.web3forms.com/submit', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
-            body: json
-        })
-        .then(async (response) => {
-            let json = await response.json();
-            if (response.status === 200) {
-                result.innerHTML = json.message;
-            } else {
-                result.innerHTML = json.message;
-            }
-        })
-        .catch(error => {
-            console.log(error);
-            result.innerHTML = "Something went wrong!";
-        })
-        .then(function() {
-            form.reset();
-            setTimeout(() => {
-                result.style.display = "none";
-            }, 3000);
-        });
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: json
+            })
+            .then(async (response) => {
+                let json = await response.json();
+                if (response.status == 200) {
+                    result.innerHTML = "Form submitted successfully";
+                } else {
+                    console.log(response);
+                    result.innerHTML = json.message;
+                }
+            })
+            .catch(error => {
+                console.log(error);
+                result.innerHTML = "Something went wrong!";
+            })
+            .then(function() {
+                form.reset();
+                setTimeout(() => {
+                    result.style.display = "none";
+                }, 3000);
+            });
     });
     </script>
     <!-- END SCRIPT -->
