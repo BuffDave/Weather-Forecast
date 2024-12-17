@@ -47,14 +47,14 @@
               </filter>
             </defs>
           </svg>
-          <!-- <div class="gradients-container">
+          <div class="gradients-container">
             <div class="g1"></div>
             <div class="g2"></div>
             <div class="g3"></div>
             <div class="g4"></div>
             <div class="g5"></div>
             <div class="interactive"></div>
-          </div> -->
+          </div>
         </div>
       </section>
       <!-- END BACKGROUND -->
@@ -118,10 +118,10 @@
                 <textarea class="form-control" name="message" id="message" rows="3" required></textarea>
               </div>
 
-              <div class="h-captcha" data-captcha="true"></div>
+              <div class="h-captcha pb-2" data-captcha="true" required></div>
 
-              <div id="result" class="pb-3"></div>
-              <button type="submit" class="btn btn-primary">Submit</button>
+              <div id="result"></div>
+              <button type="submit" class="btn btn-primary mt-2">Submit</button>
             </form>
           </div>
         </div>
@@ -149,44 +149,38 @@
     </script>
 
     <script>
-    const form = document.getElementById('form');
-    const result = document.getElementById('result');
+      const form = document.getElementById('form');
+      const result = document.getElementById('result');
 
-    form.addEventListener('submit', function(e) {
-      e.preventDefault();
-      const formData = new FormData(form);
-      const object = Object.fromEntries(formData);
-      const json = JSON.stringify(object);
-      result.innerHTML = "Please wait..."
+      form.addEventListener('submit', async function (e) {
+          e.preventDefault();
+          const formData = new FormData(form);
+          const object = Object.fromEntries(formData);
+          const json = JSON.stringify(object);
 
-        fetch('https://api.web3forms.com/submit', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                },
-                body: json
-            })
-            .then(async (response) => {
-                let json = await response.json();
-                if (response.status == 200) {
-                    result.innerHTML = "Form submitted successfully";
-                } else {
-                    console.log(response);
-                    result.innerHTML = json.message;
-                }
-            })
-            .catch(error => {
-                console.log(error);
-                result.innerHTML = "Something went wrong!";
-            })
-            .then(function() {
+          result.style.display = "block";
+          result.innerHTML = `<div class="alert alert-info">Submitting...</div>`;
+
+          try {
+              const response = await fetch('https://api.web3forms.com/submit', {
+                  method: 'POST',
+                  headers: {
+                      'Content-Type': 'application/json',
+                      'Accept': 'application/json'
+                  },
+                  body: json
+              });
+
+              if (response.status === 200) {
+                  result.innerHTML = `<div class="alert alert-success">Form successfully submitted!</div>`;
+              } else {
+                  result.innerHTML = `<div class="alert alert-danger">Please verify that you are not a robot.</div>`;
+              }
+              }  
+              finally {
                 form.reset();
-                setTimeout(() => {
-                    result.style.display = "none";
-                }, 3000);
-            });
-    });
+              }     
+        });
     </script>
     <!-- END SCRIPT -->
 
