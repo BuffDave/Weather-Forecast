@@ -239,3 +239,7 @@ function showDisplaySection(...sectionsToDisplay) {
     }
 }
 //END SEARCH BUTTON
+
+//START CONTACT FORM
+
+//END CONTACT FORM
