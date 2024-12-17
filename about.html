@@ -101,27 +101,28 @@
               <button type="button" class="close btn btn-outline-secondary m-2 py-1 px-2 rounded-5" style="font-size: 10px;">X</button>
             </div>
             <form method="POST" id="form">
+              <input type="hidden" name="access_key" value="3964976c-cbc2-44f5-9634-fa2eeaa47dcc" />
 
-              <input type="hidden" name="access_key" value="3964976c-cbc2-44f5-9634-fa2eeaa47dcc">
-            
               <div class="mb-3">
                 <label for="name" class="form-label">Full Name</label>
-                <input type="text" name="name" class="form-control" id="name">
+                <input type="text" name="name" class="form-control" id="name" required>
               </div>
             
               <div class="mb-3">
                 <label for="email" class="form-label">Email address</label>
-                <input type="email" name="email" class="form-control" id="email">
+                <input type="email" name="email" class="form-control" id="email" required>
               </div>
             
               <div class="mb-3">
                 <label for="message" class="form-label">Message</label>
-                <textarea class="form-control" name="message" id="message" rows="3"></textarea>
+                <textarea class="form-control" name="message" id="message" rows="3" required></textarea>
               </div>
-              <div class="h-captcha" data-sitekey="618603ec-b6e2-466c-b4f6-df860c30fc58" style="display:none;"></div>
-              <button type="button" id="showCaptchaBtn" class="btn btn-primary">Submit</button>
+
+              <div class="h-captcha" data-sitekey="618603ec-b6e2-466c-b4f6-df860c30fc58"></div>
+
+              <div id="result" class="pb-3"></div>
+              <button type="submit" class="btn btn-primary">Submit</button>
             </form>
-            <div id="result"></div>
           </div>
         </div>
       </section>
@@ -137,6 +138,7 @@
     <script type="module" src="src/main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
     <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
+
     <script>
     document.querySelector(".feedbackBtn").addEventListener("click", function() {
       document.querySelector(".pop-up").style.display = "flex";
@@ -146,54 +148,59 @@
     })
     </script>
 
-<script>
-  document.getElementById('showCaptchaBtn').addEventListener('click', function() {
-    // Show the hCaptcha widget when the submit button is clicked
-    document.querySelector('.h-captcha').style.display = 'block';
-    
-    // Re-render the hCaptcha if it's already hidden (required in some cases)
-    hcaptcha.render(document.querySelector('.h-captcha'), {
-      sitekey: '618603ec-b6e2-466c-b4f6-df860c30fc58'
+    <script>
+    const form = document.getElementById('form');
+    const result = document.getElementById('result');
+
+    form.addEventListener('submit', function(e) {
+        const formData = new FormData(form);
+        e.preventDefault();
+
+        // Get hCaptcha response token
+        const captchaResponse = grecaptcha.getResponse();
+
+        if (!captchaResponse) {
+            alert('Please complete the CAPTCHA');
+            return;
+        }
+
+        // Add the CAPTCHA response token to the form data
+        formData.append('h-captcha-response', captchaResponse);
+
+        const object = Object.fromEntries(formData);
+        const json = JSON.stringify(object);
+
+        result.innerHTML = "Please wait...";
+
+        fetch('https://api.web3forms.com/submit', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: json
+        })
+        .then(async (response) => {
+            let json = await response.json();
+            if (response.status === 200) {
+                result.innerHTML = json.message;
+            } else {
+                result.innerHTML = json.message;
+            }
+        })
+        .catch(error => {
+            console.log(error);
+            result.innerHTML = "Something went wrong!";
+        })
+        .then(function() {
+            form.reset();
+            setTimeout(() => {
+                result.style.display = "none";
+            }, 3000);
+        });
     });
-
-    // Change the button type to submit after showing the captcha
-    this.type = 'submit';
-  });
-
-  document.getElementById('form').addEventListener('submit', function(event) {
-    event.preventDefault(); // Prevent the form from submitting normally
-
-    const form = event.target;
-    const captchaResponse = hcaptcha.getResponse(); // Get the hCaptcha response
-
-    if (captchaResponse.length === 0) {
-      alert('Please complete the CAPTCHA');
-      return;
-    }
-
-    const formData = new FormData(form);
-    formData.append('h-captcha-response', captchaResponse); // Append the hCaptcha response
-
-    fetch('https://api.web3forms.com/submit', {
-      method: 'POST',
-      body: formData,
-    })
-    .then(response => response.json())
-    .then(data => {
-      if (data.success) {
-        document.getElementById('result').textContent = 'Thank you for your feedback!';
-        form.reset();
-      } else {
-        document.getElementById('result').textContent = 'There was an error with your submission. Please try again.';
-      }
-    })
-    .catch(error => {
-      document.getElementById('result').textContent = 'An error occurred. Please try again.';
-      console.error('Submission error:', error);
-    });
-  });
-</script>
-
+    </script>
     <!-- END SCRIPT -->
+
   </body>
 </html>
