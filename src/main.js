@@ -239,3 +239,10 @@ function showDisplaySection(...sectionsToDisplay) {
     }
 };
 //END SEARCH BUTTON
+
+const imgElements = document.querySelectorAll('img');
+imgElements.forEach(img => {
+  const originalSrc = img.getAttribute('src');
+  const optimizedSrc = `https://weather-forecast-dave.vercel.app/_next/image?url=${originalSrc}&w=800&q=80`;
+  img.setAttribute('src', optimizedSrc);
+});
