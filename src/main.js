@@ -237,9 +237,5 @@ function showDisplaySection(...sectionsToDisplay) {
     if (sectionsToDisplay.includes(weatherInfoSection2)) {
         showForecastPopupAnimation();
     }
-}
+};
 //END SEARCH BUTTON
-
-//START CONTACT FORM
-
-//END CONTACT FORM
