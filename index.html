@@ -3,12 +3,32 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/weather-favicon.svg" />
-    <meta name="description" content="Accurate and real-time weather forecasts for cities worldwide. Explore current conditions, 5-day forecasts, and detailed weather insights powered by OpenWeather." />
+    <meta name="description" content="Real-time weather forecasts for cities worldwide. Get current conditions, 5-day forecasts, and detailed weather insights powered by OpenWeather." />
     <meta name="keywords" content="weather forecast, real-time weather updates, city weather conditions, accurate weather, OpenWeather API" />
     <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Weather Forecast - Accurate Real-Time Weather Updates" />
+    <meta property="og:description" content="Discover current weather conditions, accurate predictions, and more for your favorite locations." />
+    <meta property="og:url" content="https://weather-forecast-dave.vercel.app/" />
+    <meta property="og:image" content="public/weather-logo.png" />
+    <meta property="og:type" content="website" />
     <link rel="canonical" href="https://weather-forecast-dave.vercel.app/">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Weather Forecast - Real-Time Weather Updates</title>
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "Weather Forecast",
+        "description": "Real-time weather forecasts for cities worldwide. Get current conditions, 5-day forecasts, and detailed weather insights powered by OpenWeather.",
+        "url": "https://weather-forecast-dave.vercel.app/",
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://weather-forecast-dave.vercel.app/"
+        },
+      }
+    </script>
+
   </head>
   <body>
     <!-- START HEADER -->
@@ -151,22 +171,22 @@
                         <div class="forecast-list d-flex pt-4 gap-3 pb-3">
                           <div class="bg-light bg-opacity-10 rounded-4 d-flex flex-column align-items-center justify-content-center p-3">
                             <p class="m-0 fw-lighter card-date-1">03 Dec</p>
-                            <img class="day2" src="" width="65" class="py-1">
+                            <img class="day2" src="" width="65" class="py-1" alt="Current weather icon">
                             <p class="m-0 card-temp-1">29°C</p>
                           </div>
                           <div class="bg-light bg-opacity-10 rounded-4 d-flex flex-column align-items-center justify-content-center p-3">
                             <p class="m-0 fw-lighter card-date-2">04 Dec</p>
-                            <img class="day3" src="" width="65" class="py-1">
+                            <img class="day3" src="" width="65" class="py-1" alt="Current weather icon">
                             <p class="m-0 card-temp-2">29°C</p>
                           </div>
                           <div class="bg-light bg-opacity-10 rounded-4 d-flex flex-column align-items-center justify-content-center p-3">
                             <p class="m-0 fw-lighter card-date-3">05 Dec</p>
-                            <img class="day4" src="" width="65" class="py-1">
+                            <img class="day4" src="" width="65" class="py-1" alt="Current weather icon">
                             <p class="m-0 card-temp-3">29°C</p>
                           </div>
                           <div class="bg-light bg-opacity-10 rounded-4 d-flex flex-column align-items-center justify-content-center p-3">
                             <p class="m-0 fw-lighter card-date-4">06 Dec</p>
-                            <img class="day5" src="" width="65" class="py-1">
+                            <img class="day5" src="" width="65" class="py-1" alt="Current weather icon">
                             <p class="m-0 card-temp-4">29°C</p>
                           </div>
                         </div>
