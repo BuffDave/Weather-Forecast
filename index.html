@@ -35,7 +35,7 @@
     <header>
       <nav class="navbar navbar-expand-sm sticky-top bg-light bg-opacity-25 py-1" aria-label="Main Navigation">
         <div class="container-fluid">
-          <a class="navbar-brand" href=".">
+          <a class="navbar-brand" href="./">
             <img rel="preload" src="public/weather-logo.png" alt="Weather Forecast Logo" width="30" class="d-inline-block align-middle pb-1">
             <span class="text-white fw-light fs-6 px-2">Weather Forecast</span>
           </a>
@@ -44,9 +44,6 @@
           </button>
           <div class="collapse navbar-collapse flex-grow-0" id="navbarText">
             <ul class="navbar-nav me-auto mb-0 align-items-center">
-              <li class="nav-item px-2">
-                <a class="nav-link text-white fw-light fs-6" href="./">Home</a>
-              </li>
               <li class="nav-item px-2">
                 <a class="nav-link text-white fw-light fs-6" href="about.html">About</a>
               </li>
@@ -106,7 +103,7 @@
                   </div>
                 </div>
                 <div class="not-found d-flex text-center d-none flex-column justify-content-center align-items-center" aria-live="polite">
-                  <img class="py-4" src="public/not-found.svg" alt="no search result icon" width="200">
+                  <img class="py-4" src="public/not-found.svg" alt="no search result icon" width="200" style="content-visibility: auto;">
                   <div class="text-center">
                     <h2>Not Found</h2>
                     <p class="m-0 fw-light">We couldn't find the weather details for the city. Please check the spelling or try another location.</p>  
@@ -210,7 +207,7 @@
     <!-- END MAIN -->
 
     <!-- START SCRIPT -->
-    <script type="module" src="/src/main.js"></script>
+    <script defer type="module" src="/src/main.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
     <!-- END SCRIPT -->
   </body>
