@@ -3,19 +3,21 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/weather-favicon.svg" />
-    <meta name="description" content="Stay updated with accurate and real-time weather forecasts for cities worldwide. Search for current weather conditions, future forecasts, and detailed insights powered by OpenWeather.">
-    <meta name="keywords" content="Weather, Weather Forecast, Weather Updates, City Weather, Real-Time Weather, OpenWeather">
-    <meta name="author" content="BuffDave">
+    <meta name="description" content="Accurate and real-time weather forecasts for cities worldwide. Explore current conditions, 5-day forecasts, and detailed weather insights powered by OpenWeather." />
+    <meta name="keywords" content="weather forecast, real-time weather updates, city weather conditions, accurate weather, OpenWeather API" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://weather-forecast-dave.vercel.app/">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Weather Forecast</title>
   </head>
   <body>
     <!-- START HEADER -->
     <header>
-      <nav class="navbar navbar-expand-sm sticky-top bg-light bg-opacity-25 py-1">
+      <nav class="navbar navbar-expand-sm sticky-top bg-light bg-opacity-25 py-1" aria-label="Main Navigation">
         <div class="container-fluid">
           <a class="navbar-brand" href=".">
-            <img src="public/weather-logo.png" alt="Logo" width="30" class="d-inline-block align-middle pb-1">
+            <img rel="preload" src="public/weather-logo.png" alt="Weather Forecast Logo" width="30" class="d-inline-block align-middle pb-1">
             <span class="text-white fw-light fs-6 px-2">Weather Forecast</span>
           </a>
           <button class="navbar-toggler border border-light text-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -24,7 +26,7 @@
           <div class="collapse navbar-collapse flex-grow-0" id="navbarText">
             <ul class="navbar-nav me-auto mb-0 align-items-center">
               <li class="nav-item px-2">
-                <a class="nav-link text-white fw-light fs-6" aria-current="page" href="https://github.com/BuffDave/Weather-Forecast">Github</a>
+                <a class="nav-link text-white fw-light fs-6" aria-current="page" href="https://github.com/BuffDave/Weather-Forecast" target="_blank" rel="noopener noreferrer">Github</a>
               </li>
               <li class="nav-item px-2">
                 <a class="nav-link text-white fw-light fs-6" href="about.html">About</a>
@@ -37,11 +39,12 @@
     <!-- END HEADER -->
 
     <!-- START MAIN -->
-    <main>
+    <main role="main">
       <!-- START BACKGROUND -->
-      <section>
+      <section aria-labelledby="current-weather">
+        <h1 id="current-weather" class="visually-hidden">Weather Information</h1>
         <div class="gradient-bg">
-          <svg xmlns="http://www.w3.org/2000/svg">
+          <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
             <defs>
               <filter id="goo">
                 <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
@@ -50,13 +53,13 @@
               </filter>
             </defs>
           </svg>
-          <!-- <div class="gradients-container">
+          <div class="gradients-container">
             <div class="g1"></div>
             <div class="g2"></div>
             <div class="g3"></div>
             <div class="g4"></div>
             <div class="g5"></div>
-            <div class="interactive"></div> -->
+            <div class="interactive"></div>
           </div>
         </div>
       </section>
@@ -69,18 +72,18 @@
               <div class="col-md-6">
                 <div class="search-bar">
                   <input class="city-input p-2 px-3 pe-5 text-white bg-light bg-opacity-10" type="text" placeholder="Search City">
-                  <button class="search-btn">
-                    <img src="public/icon-search.png" alt="search icon" width="25">
+                  <button class="search-btn" type="button" class="search-btn" aria-label="Search City">
+                    <img rel="preload" src="public/icon-search.png" alt="search icon" width="25">
                   </button>
                 </div>
                 <div class="search-city d-flex flex-column justify-content-center align-items-center">
-                  <img class="py-4" src="public/search-result.svg" alt="no search result icon" width="200">
+                  <img rel="preload" class="py-4" src="public/search-result.svg" alt="no search result icon" width="200">
                   <div class="text-center" id="search">
                     <h4>Search City</h4>
                     <p class="fw-light">Found out the weather conditions of the city</p>
                   </div>
                 </div>
-                <div class="not-found d-flex text-center d-none flex-column justify-content-center align-items-center">
+                <div class="not-found d-flex text-center d-none flex-column justify-content-center align-items-center" aria-live="polite">
                   <img class="py-4" src="public/not-found.svg" alt="no search result icon" width="200">
                   <div class="text-center">
                     <h4>Not Found</h4>
@@ -186,7 +189,7 @@
 
     <!-- START SCRIPT -->
     <script type="module" src="/src/main.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
     <!-- END SCRIPT -->
   </body>
 </html>

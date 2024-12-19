@@ -3,8 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/weather-favicon.svg" />
+    <meta name="description" content="Learn about Weather Forecast, a website offering real-time weather updates, 5-day forecasts, and detailed weather data for locations worldwide." />
+    <meta name="keywords" content="weather forecast, about weather, real-time weather, future weather updates, global weather data" />
+    <link rel="canonical" href="https://weather-forecast-dave.vercel.app/about.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Weather Forecast</title>
+    <title>About Weather Forecast - Real-Time Weather Updates</title>
   </head>
   <body>
     <!-- START HEADER -->
@@ -21,7 +24,7 @@
           <div class="collapse navbar-collapse flex-grow-0" id="navbarText">
             <ul class="navbar-nav me-auto mb-0 align-items-center">
               <li class="nav-item px-2">
-                <a class="nav-link text-white fw-light fs-6" aria-current="page" href="https://github.com/BuffDave/Weather-Forecast">Github</a>
+                <a class="nav-link text-white fw-light fs-6" aria-current="page" href="https://github.com/BuffDave/Weather-Forecast" target="_blank" rel="noopener">Github</a>
               </li>
               <li class="nav-item px-2">
                 <a class="nav-link text-white fw-light fs-6" href="about.html">About</a>
@@ -38,7 +41,7 @@
       <!-- START BACKGROUND -->
       <section>
         <div class="gradient-bg">
-          <svg xmlns="http://www.w3.org/2000/svg">
+          <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
             <defs>
               <filter id="goo">
                 <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
@@ -47,19 +50,19 @@
               </filter>
             </defs>
           </svg>
-          <!-- <div class="gradients-container">
+          <div class="gradients-container">
             <div class="g1"></div>
             <div class="g2"></div>
             <div class="g3"></div>
             <div class="g4"></div>
             <div class="g5"></div>
             <div class="interactive"></div>
-          </div> -->
+          </div>
         </div>
       </section>
       <!-- END BACKGROUND -->
 
-      <section>
+      <section aria-labelledby="about-weather">
         <div class="container weather-interface">
           <div class="content py-md-4 px-md-5 py-3 px-4 mb-2">
             <div class="row justify-content-center">
@@ -95,10 +98,10 @@
             </div>
           </div>
         </div>
-        <div class="pop-up">
+        <div class="pop-up" aria-hidden="true">
           <div class="popup-content d-flex justify-content-center bg-light border border-secondary">
             <div class="position-absolute top-0 end-0">
-              <button type="button" class="close btn btn-outline-secondary m-2 py-1 px-2 rounded-5" style="font-size: 10px;">X</button>
+              <button type="button" class="close btn btn-outline-secondary m-2 py-1 px-2 rounded-5" style="font-size: 10px;" aria-label="Close Feedback Form">X</button>
             </div>
             <form method="POST" id="form">
               <input type="hidden" name="access_key" value="3964976c-cbc2-44f5-9634-fa2eeaa47dcc" />
