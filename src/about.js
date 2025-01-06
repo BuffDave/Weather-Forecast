@@ -33,24 +33,18 @@ const closeForm = document.querySelector('.close')
 const form = document.getElementById('form');
 const result = document.getElementById('result');
 
-// Function to load hCaptcha
 function loadHcaptcha() {
   if (window.hcaptcha) {
     console.log("Hcaptcha loaded successfully");
     return;
-  } // Prevent loading if hCaptcha is already loaded
+  }
 
   const script = document.createElement('script');
-  script.src = 'https://web3forms.com/client/script.js'; // Replace with the correct hCaptcha script URL
+  script.src = 'https://web3forms.com/client/script.js';
   script.async = true;
   script.defer = true;
 
   script.onload = () => {
-        // Render the hCaptcha widget after the script has loaded
-        const hcaptchaContainer = document.querySelector('.h-captcha'); // Select the container using the class
-        hcaptcha.render(hcaptchaContainer, {
-            sitekey: import.meta.env.VITE_API_FORM // Replace with your actual site key
-        });
         console.log("hCaptcha widget has been rendered.");
     };
   document.body.appendChild(script);
