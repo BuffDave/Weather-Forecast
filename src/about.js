@@ -41,6 +41,7 @@ function loadHcaptcha() {
 
   const script = document.createElement('script');
   script.src = 'https://web3forms.com/client/script.js';
+  script.async = true;
   script.defer = true;
 
   script.onload = () => {
