@@ -1,7 +1,7 @@
 {
     "headers": [
       {
-        "source": "/**/*.gz",
+        "source": "/dist/*.gz",
         "headers": [
           { "key": "Content-Encoding", "value": "gzip" }
         ]
