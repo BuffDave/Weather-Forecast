@@ -3,6 +3,13 @@
 $large: 1024px;
 $small: 425px;
 
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../public/InterVariable.woff2') format('woff2');
+}
+
 html, body {
     font-family: 'Inter', sans-serif;
     margin: 0;
