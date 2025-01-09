@@ -7,6 +7,7 @@ export default defineConfig({
       input: {
         main: 'index.html',
         about: 'about.html',
+        google: 'googlec08a62fc3513bf8a.html',
       },
     },
   },
