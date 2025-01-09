@@ -1,4 +1,0 @@
-User-agent: *
-Disallow: /private/
-Allow: /index.html
-Allow: /about.html
