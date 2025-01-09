@@ -1,9 +1,10 @@
 {
     "headers": [
       {
-        "source": "/dist/(.*\\.gz)$",
+        "source": "/(.*\\.gz)$",
         "headers": [
-          { "key": "Content-Encoding", "value": "gzip" }
+          { "key": "Content-Encoding", "value": "gzip" },
+          { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
         ]
       }
     ]
