@@ -1,4 +1,5 @@
 import { defineConfig } from 'vite';
+import compression from 'vite-plugin-compression';
 
 export default defineConfig({
   build: {
@@ -12,4 +13,11 @@ export default defineConfig({
       },
     },
   },
+  plugins: [
+    compression({
+      algorithm: 'gzip',
+      threshold: 1024,
+      ext: '.gz',
+    }),
+  ],
 });
