@@ -6,13 +6,11 @@ module.exports = {
       content: [
         './*.html',
         './src/**/*.{js,scss}',
-        './public/**/*.svg', 
+        './public/**/*.svg',
       ],
       safelist: {
-        standard: [
-          /^collapse/,
-          /^navbar/,
-          /^show/,
+        deep: [
+          /^collapsing/,
         ],
       },
     }),
