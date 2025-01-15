@@ -104,7 +104,7 @@ async function updateWeatherInfo(city) {
     
     if (weatherData.cod != 200) {
         showDisplaySection(notFoundSection)
-        return
+        return;
     }
 
     const {
@@ -117,6 +117,13 @@ async function updateWeatherInfo(city) {
 
     console.log(weatherData)
 
+    nameTxt.textContent = name
+    countryTxt.textContent = ', ' + country
+    tempTxt.textContent = Math.round (temp) + ' °C'
+    conditionTxt.textContent = main
+    humidityTxt.textContent = humidity + '%'
+    windSpeedTxt.textContent = speed + ' M/s'
+
     gsap.fromTo(
         allText,
         { opacity: 0 }, 
@@ -127,30 +134,25 @@ async function updateWeatherInfo(city) {
         }
     );
 
-    nameTxt.textContent = name
-    countryTxt.textContent = ', ' + country
-    tempTxt.textContent = Math.round (temp) + ' °C'
-    conditionTxt.textContent = main
-    humidityTxt.textContent = humidity + '%'
-    windSpeedTxt.textContent = speed + ' M/s'
-
-    gsap.fromTo(
-        weatherSummaryImg,
-        { scale: 0, opacity: 0 }, 
-        {
-            scale: 1.1, 
-            opacity: 1,
-            duration: 0.6,
-            ease: "power2.out",
-            onComplete: () => {
-                gsap.to(weatherSummaryImg, {
-                    scale: 1,
-                    duration: 0.6,
-                    ease: "power2.out"
-                });
+    weatherSummaryImg.onload = () => {
+        gsap.fromTo(
+            weatherSummaryImg,
+            { scale: 0, opacity: 0 },
+            {
+                scale: 1.1,
+                opacity: 1,
+                duration: 0.6,
+                ease: "power2.out",
+                onComplete: () => {
+                    gsap.to(weatherSummaryImg, {
+                        scale: 1,
+                        duration: 0.6,
+                        ease: "power2.out"
+                    });
+                }
             }
-        }
-    );
+        );
+    };
 
     currentDate.textContent = getCurrentDate()
     weatherSummaryImg.src = `/${getWeatherIcon(id)}`
@@ -202,17 +204,26 @@ function updateForecastItems(weatherData) {
 
 function showForecastPopupAnimation() {
     const forecastImages = document.querySelectorAll('.forecast-list img');
+    let loadedCount = 0;
 
-    gsap.fromTo(
-        forecastImages,
-        { opacity: 0 },
-        {
-            opacity: 1,
-            duration: 0.5,
-            ease: 'back.out(1.7)',
-            stagger: 0.15 
-        }
-    );
+    forecastImages.forEach((img) => {
+        img.onload = () => {
+            loadedCount++;
+
+            if (loadedCount === forecastImages.length) {
+                gsap.fromTo(
+                    forecastImages,
+                    { opacity: 0 },
+                    {
+                        opacity: 1,
+                        duration: 0.5,
+                        ease: 'back.out(1.7)',
+                        stagger: 0.15,
+                    }
+                );
+            }
+        };
+    });
 }
 
 function showDisplaySection(...sectionsToDisplay) {
