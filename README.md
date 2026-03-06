@@ -6,9 +6,9 @@ A user-friendly weather forecast website that provides real-time and future weat
 
 ## Version Comparison
 
-| V1                                              | V2                                              |
-| ----------------------------------------------- | ----------------------------------------------- |
-| ![Weather Forecast V1](docs/screenshots/v1.png) | ![Weather Forecast V2](docs/screenshots/v2.png) |
+| V1 | V2 |
+| --- | --- |
+| <a href="https://raw.githubusercontent.com/BuffDave/Weather-Forecast/main/docs/screenshots/v1.png"><img src="docs/screenshots/v1.png" alt="Weather Forecast V1"></a> | <a href="https://raw.githubusercontent.com/BuffDave/Weather-Forecast/main/docs/screenshots/v2.png"><img src="docs/screenshots/v2.png" alt="Weather Forecast V2"></a> |
 
 ---
 
