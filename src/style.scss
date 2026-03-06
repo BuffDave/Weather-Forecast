@@ -1,279 +1,644 @@
 @import "../node_modules/bootstrap/scss/bootstrap";
 
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
 $large: 1024px;
 $small: 425px;
 
-@font-face {
-  font-family: 'Inter';
-  font-display: swap;
-  src: url('https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;500;700&display=swap');
-}
+// ─── Color Palette ───────────────────────────────────────────────────────────
+$blue:  #00A7E1;
+$navy:  #2541B2;
+$dark:  #121212;
+$white: #ffffff;
+
 
 html, body {
-    font-family: 'Inter', sans-serif;
-    margin: 0;
-    padding: 0;
-  }
-
-.navbar-toggler-icon {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23fff' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba(255, 255, 255, 1)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+  font-family: 'DM Sans', sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  background-color: #f0f2f7;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url('/hero-bg.png');
+    background-repeat: repeat;
+    background-size:850px auto;
+    opacity: 0.17;
+    z-index: 0;
+    pointer-events: none;
+  }
+}
+
+// ─── Navbar ──────────────────────────────────────────────────────────────────
+main, footer {
+  position: relative;
+  z-index: 1;
+}
+
+header {
+  position: relative;
+  z-index: 1;
+  padding: 12px 16px;
+  pointer-events: auto;
+}
+
+.navbar {
+  background: $navy !important;
+  border-bottom: none;
+  box-shadow: 0 4px 24px rgba(37, 65, 178, 0.3);
+  max-width: 900px;
+  margin: 0 auto;
+  border-radius: 50px;
+  padding-left: 20px !important;
+  padding-right: 20px !important;
+  pointer-events: all;
+  // Smoothly transition shape when the mobile menu opens
+  transition: border-radius 0.25s ease;
+
+  // When mobile menu is open, flatten the bottom corners
+  &:has(.navbar-collapse.show) {
+    border-radius: 20px;
+  }
+}
+
+.navbar-brand span {
+  letter-spacing: 0.02em;
+  color: $white;
+}
+
+.nav-link {
+  color: rgba(255, 255, 255, 0.8) !important;
+  transition: color 0.2s ease, background 0.2s ease;
+  border-radius: 8px;
+  padding: 6px 12px !important;
+
+  &:hover {
+    color: $white !important;
+    background: transparent !important;
+  }
+}
+
+.nav-github {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.8) !important;
+
+  &:hover {
+    color: $white !important;
+    background: transparent !important;
+  }
+}
+
+// Collapsed mobile menu styling
+.navbar-collapse {
+  &.show,
+  &.collapsing {
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    margin-top: 10px;
+    padding-top: 8px;
+    padding-bottom: 4px;
+  }
+
+  .navbar-nav {
+    gap: 4px;
+    padding-bottom: 4px;
+  }
+
+  .nav-link {
+    display: block;
+    width: 100%;
+  }
+}
+
+.navbar-toggler {
+  border-color: rgba(255, 255, 255, 0.3) !important;
+  padding: 4px 8px;
+
+  &:focus {
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.15);
+  }
+}
+
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23ffffff' viewBox='0 0 30 30'%3E%3Cpath stroke='%23ffffff' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+  width: 1.1em;
+  height: 1.1em;
+}
+
+// ─── Search ──────────────────────────────────────────────────────────────────
 .search-bar {
   position: relative;
 }
 
 .city-input {
-  border-radius: 20px;
+  border-radius: 50px;
   width: 100%;
   outline: none;
-  border: 3px solid transparent;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
-}
+  border: 2px solid rgba(0, 0, 0, 0.12);
+  background: #f4f7fb !important;
+  color: $dark !important;
+  font-size: 0.95rem;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
 
-.city-input:focus {
-  border: 3px solid rgb(255, 255, 255, 0.15);
-  box-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
-}
+  &:focus {
+    border-color: $blue;
+    background: $white !important;
+    box-shadow: 0 0 0 4px rgba(0, 167, 225, 0.12);
+  }
 
-.city-input::placeholder {
-  color: rgb(255, 255, 255, 0.75);
+  &::placeholder {
+    color: rgba(18, 18, 18, 0.4);
+  }
 }
 
 .search-btn {
   position: absolute;
-  right: 10px;
+  right: 14px;
   top: 50%;
   transform: translateY(-50%);
   background: none;
   border: none;
   cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.2s ease;
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+// ─── Layout ──────────────────────────────────────────────────────────────────
+
+.main-section {
+  padding: 0 0 24px;
 }
 
 .weather-interface {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   width: 60%;
+  margin: 0 auto;
+  padding-top: 28px;
+
   @media screen and (max-width: $large) {
-    width: 100%; 
-    top: 15%; 
-    transform: translate(-50%, 0); 
+    width: 92%;
+  }
+
+  @media screen and (max-width: 576px) {
+    width: 100%;
+    padding: 12px 12px 0;
   }
 }
 
-.forecast-list {
-  overflow-x: scroll;
-}
-
-.forecast-list::-webkit-scrollbar {
-  height: 10px;
-}
-
-.forecast-list::-webkit-scrollbar-track {
-  background-color: rgb(0, 0, 0, 0.15);
-  border-radius: 99px;
-}
-
-.forecast-list::-webkit-scrollbar-thumb {
-  background-color: rgb(0, 0, 0, 0.3);
-  border-radius: 99px;
-}
-
+// ─── Content Card ────────────────────────────────────────────────────────────
 .content {
-  backdrop-filter: blur(14px);
-  background-color: rgba(2, 2, 2, 0.2);
-  box-shadow: 0 15px 25px rgba(129, 124, 124, 0.2);
-  color: white;
-  border-radius: 10px;
+  background: $white;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 32px rgba(0, 0, 0, 0.08), 0 1px 4px rgba(0, 0, 0, 0.04);
+  color: $dark;
+  border-radius: 24px;
+
+  // Override any Bootstrap text-white utilities inside the card
+  .text-white,
+  .text-white-50 {
+    color: $dark !important;
+  }
 }
 
+// ─── Location Badge ──────────────────────────────────────────────────────────
+.location-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(0, 167, 225, 0.08);
+  border: 1px solid rgba(0, 167, 225, 0.2);
+  border-radius: 50px;
+  padding: 5px 14px 5px 8px;
+  font-size: 0.9rem;
+  color: $dark;
+}
+
+.current-date {
+  font-size: 0.83rem;
+  color: rgba(18, 18, 18, 0.55);
+}
+
+// ─── Temperature ─────────────────────────────────────────────────────────────
+.temp-display {
+  font-size: 3.8rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -2px;
+  color: $dark;
+}
+
+.condition-badge {
+  display: inline-block;
+  background: $navy;
+  border-radius: 50px;
+  padding: 4px 16px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: $white;
+  margin-top: 10px;
+  letter-spacing: 0.03em;
+}
+
+// ─── Divider ─────────────────────────────────────────────────────────────────
+.weather-divider {
+  border: none;
+  border-top: 1px solid rgba(0, 0, 0, 0.07);
+  margin: 4px 0 16px;
+}
+
+// ─── Stat Cards (Humidity / Wind) ────────────────────────────────────────────
+.stat-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  background: rgba(0, 167, 225, 0.05);
+  border: 1px solid rgba(0, 167, 225, 0.15);
+  border-radius: 16px;
+  padding: 14px 16px;
+  color: $dark;
+  transition: background 0.2s ease, border-color 0.2s ease;
+
+  &:hover {
+    background: rgba(0, 167, 225, 0.1);
+    border-color: $blue;
+  }
+
+  .stat-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: rgba(18, 18, 18, 0.5);
+    margin: 0;
+  }
+
+  .stat-value {
+    font-size: 1rem;
+    font-weight: 600;
+    color: $dark;
+    margin: 0;
+  }
+}
+
+// ─── Forecast Scrollbar ───────────────────────────────────────────────────────
+.forecast-list {
+  overflow-x: auto;
+  overflow-y: visible;
+  padding-top: 6px;
+  margin-top: -6px;
+  padding-bottom: 6px;
+
+  &::-webkit-scrollbar {
+    height: 4px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 99px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $blue;
+    border-radius: 99px;
+  }
+}
+
+// ─── Forecast Cards ──────────────────────────────────────────────────────────
+.forecast-card {
+  background: #f4f7fb;
+  border: 1px solid rgba(0, 0, 0, 0.07);
+  border-radius: 16px;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 84px;
+  flex-shrink: 0;
+  color: $dark;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+
+  &:hover {
+    background: rgba(0, 167, 225, 0.08);
+    border-color: $blue;
+    transform: translateY(-3px);
+  }
+
+  .forecast-date {
+    font-size: 0.72rem;
+    color: rgba(18, 18, 18, 0.55);
+    margin: 0 0 6px;
+    white-space: nowrap;
+  }
+
+  .forecast-temp {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: $dark;
+    margin: 6px 0 0;
+  }
+}
+
+// ─── Feedback Button ─────────────────────────────────────────────────────────
+.feedback-btn {
+  background: $navy;
+  color: $white;
+  border: 2px solid $navy;
+  border-radius: 50px;
+  padding: 10px 32px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    background: #1c33a0;
+    border-color: #1c33a0;
+    color: $white;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(37, 65, 178, 0.35);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+// ─── Pop-up Overlay ──────────────────────────────────────────────────────────
 .pop-up {
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(18, 18, 18, 0.55);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
   width: 100%;
   height: 100vh;
-  position: absolute;
+  position: fixed;
+  top: 0;
+  left: 0;
   display: none;
+  z-index: 1050;
+  align-items: center;
+  justify-content: center;
 }
 
 .popup-content {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  padding: 24px;
-  border-radius: 8px;
+  position: relative;
+  background: $white;
+  padding: 32px;
+  border-radius: 24px;
+  width: 90%;
+  max-width: 460px;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.25);
+
   @media screen and (max-width: $small) {
-    padding: 8px;
-    width: 100%; 
-    border-radius: 0px;
-    padding-top: 30px;
-    padding-bottom: 30px;
+    padding: 24px 20px;
+    width: 100%;
+    border-radius: 20px 20px 0 0;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    max-width: unset;
   }
 }
-  
-  :root {
-    --color-bg1: rgb(108, 0, 162);
-    --color-bg2: rgb(0, 17, 82);
-    --color1: 18, 113, 255;
-    --color2: 221, 74, 255;
-    --color3: 100, 220, 255;
-    --color4: 200, 50, 50;
-    --color5: 180, 180, 50;
-    --color-interactive: 140, 100, 255;
-    --circle-size: 80%;
-    --blending: hard-light;
+
+.popup-header {
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+  margin-bottom: 20px;
+}
+
+.close-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(0, 0, 0, 0.06);
+  color: $dark;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.2s ease;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.12);
   }
-  
-  @keyframes moveInCircle {
-    0% {
-      transform: rotate(0deg);
-    }
-    50% {
-      transform: rotate(180deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
-  }
-  
-  @keyframes moveVertical {
-    0% {
-      transform: translateY(-50%);
-    }
-    50% {
-      transform: translateY(50%);
-    }
-    100% {
-      transform: translateY(-50%);
-    }
-  }
-  
-  @keyframes moveHorizontal {
-    0% {
-      transform: translateX(-50%) translateY(-10%);
-    }
-    50% {
-      transform: translateX(50%) translateY(10%);
-    }
-    100% {
-      transform: translateX(-50%) translateY(-10%);
-    }
-  }
-  
-  
-  .gradient-bg {
-    width: 100vw;
-    height: 100vh;
-    position: fixed;
-    overflow: hidden;
-    background: linear-gradient(40deg, var(--color-bg1), var(--color-bg2));
-    top: 0;
-    left: 0;
-  
-    svg {
-      display: none;
-    }
-  
-  
-    .gradients-container {
-      filter: url(#goo) blur(40px) ;
-      width: 100%;
-      height: 100%;
-    }
-  
-    .g1 {
-      position: absolute;
-      background: radial-gradient(circle at center, rgba(var(--color1), 0.8) 0, rgba(var(--color1), 0) 50%) no-repeat;
-      mix-blend-mode: var(--blending);
-  
-      width: var(--circle-size);
-      height: var(--circle-size);
-      top: calc(50% - var(--circle-size) / 2);
-      left: calc(50% - var(--circle-size) / 2);
-  
-      transform-origin: center center;
-      animation: moveVertical 30s ease infinite;
-  
-      opacity: 1;
-    }
-  
-    .g2 {
-      position: absolute;
-      background: radial-gradient(circle at center, rgba(var(--color2), 0.8) 0, rgba(var(--color2), 0) 50%) no-repeat;
-      mix-blend-mode: var(--blending);
-  
-      width: var(--circle-size);
-      height: var(--circle-size);
-      top: calc(50% - var(--circle-size) / 2);
-      left: calc(50% - var(--circle-size) / 2);
-  
-      transform-origin: calc(50% - 400px);
-      animation: moveInCircle 20s reverse infinite;
-  
-      opacity: 1;
-    }
-  
-    .g3 {
-      position: absolute;
-      background: radial-gradient(circle at center, rgba(var(--color3), 0.8) 0, rgba(var(--color3), 0) 50%) no-repeat;
-      mix-blend-mode: var(--blending);
-  
-      width: var(--circle-size);
-      height: var(--circle-size);
-      top: calc(50% - var(--circle-size) / 2 + 200px);
-      left: calc(50% - var(--circle-size) / 2 - 500px);
-  
-      transform-origin: calc(50% + 400px);
-      animation: moveInCircle 40s linear infinite;
-  
-      opacity: 1;
-    }
-  
-    .g4 {
-      position: absolute;
-      background: radial-gradient(circle at center, rgba(var(--color4), 0.8) 0, rgba(var(--color4), 0) 50%) no-repeat;
-      mix-blend-mode: var(--blending);
-  
-      width: var(--circle-size);
-      height: var(--circle-size);
-      top: calc(50% - var(--circle-size) / 2);
-      left: calc(50% - var(--circle-size) / 2);
-  
-      transform-origin: calc(50% - 200px);
-      animation: moveHorizontal 40s ease infinite;
-  
-      opacity: 0.7;
-    }
-  
-    .g5 {
-      position: absolute;
-      background: radial-gradient(circle at center, rgba(var(--color5), 0.8) 0, rgba(var(--color5), 0) 50%) no-repeat;
-      mix-blend-mode: var(--blending);
-  
-      width: calc(var(--circle-size) * 2);
-      height: calc(var(--circle-size) * 2);
-      top: calc(50% - var(--circle-size));
-      left: calc(50% - var(--circle-size));
-  
-      transform-origin: calc(50% - 800px) calc(50% + 200px);
-      animation: moveInCircle 20s ease infinite;
-  
-      opacity: 1;
-    }
-  
-    .interactive {
-      position: absolute;
-      background: radial-gradient(circle at center, rgba(var(--color-interactive), 0.8) 0, rgba(var(--color-interactive), 0) 50%) no-repeat;
-      mix-blend-mode: var(--blending);
-  
-      width: 100%;
-      height: 100%;
-      top: -50%;
-      left: -50%;
-  
-      opacity: 0.7;
-    }
+}
+
+// ─── Feedback Form ───────────────────────────────────────────────────────────
+.feedback-label {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: rgba(18, 18, 18, 0.65);
+  margin-bottom: 6px;
+  letter-spacing: 0.02em;
+}
+
+.feedback-input {
+  width: 100%;
+  border: 1.5px solid rgba(0, 0, 0, 0.12);
+  border-radius: 12px;
+  padding: 10px 14px;
+  font-size: 0.9rem;
+  color: $dark;
+  background: #f4f7fb;
+  outline: none;
+  font-family: 'Inter', sans-serif;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  resize: vertical;
+
+  &:focus {
+    border-color: $blue;
+    background: $white;
+    box-shadow: 0 0 0 4px rgba(0, 167, 225, 0.1);
   }
 
+  &::placeholder {
+    color: rgba(18, 18, 18, 0.35);
+  }
+}
+
+// ─── Form Status Messages ─────────────────────────────────────────────────────
+#result {
+  transition: opacity 0.4s ease;
+}
+
+.form-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 0.85rem;
+  font-weight: 500;
+
+  &--loading {
+    background: rgba(0, 167, 225, 0.08);
+    border: 1px solid rgba(0, 167, 225, 0.25);
+    color: #0077a8;
+  }
+
+  &--success {
+    background: rgba(22, 163, 74, 0.08);
+    border: 1px solid rgba(22, 163, 74, 0.25);
+    color: #15803d;
+  }
+
+  &--error {
+    background: rgba(220, 53, 69, 0.08);
+    border: 1px solid rgba(220, 53, 69, 0.25);
+    color: #b91c1c;
+  }
+}
+
+.status-spinner {
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(0, 167, 225, 0.25);
+  border-top-color: #00A7E1;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  flex-shrink: 0;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.feedback-submit {
+  background: $navy;
+  color: $white;
+  border: none;
+  border-radius: 12px;
+  padding: 12px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  letter-spacing: 0.02em;
+  transition: background 0.2s ease, transform 0.15s ease;
+
+  &:hover {
+    background: #1c33a0;
+    transform: translateY(-1px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+// ─── Icon Color Filters ──────────────────────────────────────────────────────
+// Converts white PNG icons → #00A7E1 (blue accent)
+@mixin icon-blue {
+  filter: brightness(0) invert(54%) sepia(86%) saturate(1200%) hue-rotate(163deg) brightness(95%);
+}
+
+// Converts white PNG icons → #121212 (dark, semi-transparent)
+@mixin icon-dark {
+  filter: brightness(0) opacity(0.6);
+}
+
+.navbar-brand img   { filter: none; }
+.location-badge img { @include icon-blue; }
+.stat-card img      { @include icon-blue; }
+
+.search-btn img { @include icon-dark; }
+
+// ─── Powered By ──────────────────────────────────────────────────────────────
+.powered-by p {
+  font-size: 0.8rem;
+  color: rgba(18, 18, 18, 0.5) !important;
+
+  a {
+    color: $blue !important;
+  }
+}
+
+// ─── Mobile Responsiveness ───────────────────────────────────────────────────
+
+// Small phones (≤ 576px)
+@media screen and (max-width: 576px) {
+  header {
+    padding: 10px 10px;
+  }
+
+  .navbar {
+    border-radius: 20px;
+    padding-left: 14px !important;
+    padding-right: 14px !important;
+
+    &:has(.navbar-collapse.show) {
+      border-radius: 16px;
+    }
+  }
+  .content {
+    border-radius: 16px;
+  }
+
+  .temp-display {
+    font-size: 2.6rem;
+    letter-spacing: -1px;
+  }
+
+  .search-city img,
+  .not-found img {
+    width: 140px !important;
+  }
+
+  .weather-summary-img {
+    width: 100px !important;
+  }
+
+  .powered-by {
+    padding-bottom: 16px;
+  }
+}
+
+// Very small phones (≤ 375px)
+@media screen and (max-width: 375px) {
+  .temp-display {
+    font-size: 2.1rem;
+  }
+
+  // Stack stat cards vertically on tiny screens
+  .humidity-windspeed .d-flex {
+    flex-direction: column;
+  }
+
+  .stat-card {
+    width: 100%;
+  }
+
+  .forecast-card {
+    min-width: 72px;
+    padding: 10px;
+  }
+}

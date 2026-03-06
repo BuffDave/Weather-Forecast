@@ -1,31 +1,6 @@
 import './style.scss'
 import 'bootstrap';
-
-// // START BACKGROUND
-document.addEventListener('DOMContentLoaded', () => {
-  const interBubble = document.querySelector('.interactive');
-  let curX = 0;
-  let curY = 0;
-  let tgX = 0;
-  let tgY = 0;
-
-  function move() {
-      curX += (tgX - curX) / 20;
-      curY += (tgY - curY) / 20;
-      interBubble.style.transform = `translate(${Math.round(curX)}px, ${Math.round(curY)}px)`;
-      requestAnimationFrame(() => {
-          move();
-      });
-  }
-
-  window.addEventListener('mousemove', (event) => {
-      tgX = event.clientX;
-      tgY = event.clientY;
-  });
-
-  move();
-});
-// END BACKGROUND
+import gsap from 'gsap';
 
 //START SEARCH BUTTON
 const cityInput = document.querySelector('.city-input')
@@ -47,25 +22,20 @@ const currentDate = document.querySelector('.current-date')
 
 const forecastItems = document.querySelector('.forecast-list')
 
-const allText = document.querySelectorAll('.name-text, .country, .humidity-value, .wind-speed-value, .temp-text, .card-temp-1, .card-date-1, .condition-text')
-
 const apiKey = import.meta.env.VITE_API_KEY;
 const apiURL = import.meta.env.VITE_API_URL;
 
 searchBtn.addEventListener('click', () => {
     if (cityInput.value.trim() != '') {
         updateWeatherInfo(cityInput.value)
-        console.log(cityInput.value)
         cityInput.value = ''
         cityInput.blur()
     }
 })
+
 cityInput.addEventListener('keydown', (event) => {
-    if (event.key == 'Enter' &&
-        cityInput.value.trim() != '' 
-    ) {
+    if (event.key == 'Enter' && cityInput.value.trim() != '') {
         updateWeatherInfo(cityInput.value)
-        console.log(cityInput.value)
         cityInput.value = ''
         cityInput.blur()
     }
@@ -73,10 +43,12 @@ cityInput.addEventListener('keydown', (event) => {
 
 async function getFetchData(endPoint, city) {
     const apiUrl = `${apiURL}/data/2.5/${endPoint}?q=${city}&appid=${apiKey}&units=metric`
-
-    const response = await fetch(apiUrl)
-
-    return response.json()
+    try {
+        const response = await fetch(apiUrl)
+        return response.json()
+    } catch {
+        return null
+    }
 }
 
 function getWeatherIcon(id) {
@@ -90,49 +62,47 @@ function getWeatherIcon(id) {
 }
 
 function getCurrentDate() {
-    const currentDate = new Date()
+    const date = new Date()
     const options = {
         weekday: 'short',
         day: '2-digit',
         month: 'short'
     }
-    return currentDate.toLocaleDateString('en-GB', options)
+    return date.toLocaleDateString('en-GB', options)
 }
 
 async function updateWeatherInfo(city) {
-    const weatherData = await getFetchData('weather', city)
-    
-    if (weatherData.cod != 200) {
+    // Fetch both endpoints in parallel instead of sequentially
+    const [weatherData, forecastsData] = await Promise.all([
+        getFetchData('weather', city),
+        getFetchData('forecast', city)
+    ])
+
+    if (!weatherData || weatherData.cod != 200) {
         showDisplaySection(notFoundSection)
-        return;
+        return
     }
 
     const {
-        name: name,
+        name,
         sys: { country },
         main: { temp, humidity },
-        weather: [{ id, main}],
-        wind: {speed}
+        weather: [{ id, main }],
+        wind: { speed }
     } = weatherData
-
-    console.log(weatherData)
 
     nameTxt.textContent = name
     countryTxt.textContent = ', ' + country
-    tempTxt.textContent = Math.round (temp) + ' °C'
+    tempTxt.textContent = Math.round(temp) + ' °C'
     conditionTxt.textContent = main
     humidityTxt.textContent = humidity + '%'
     windSpeedTxt.textContent = speed + ' M/s'
+    currentDate.textContent = getCurrentDate()
 
-    gsap.fromTo(
-        allText,
-        { opacity: 0 }, 
-        {
-            opacity: 1,
-            duration: 0.6,
-            ease: "power2.out",
-        }
-    );
+    const allText = document.querySelectorAll(
+        '.name-text, .country, .humidity-value, .wind-speed-value, .temp-text, .condition-text'
+    )
+    gsap.fromTo(allText, { opacity: 0 }, { opacity: 1, duration: 0.6, ease: 'power2.out' })
 
     weatherSummaryImg.onload = () => {
         gsap.fromTo(
@@ -142,111 +112,107 @@ async function updateWeatherInfo(city) {
                 scale: 1.1,
                 opacity: 1,
                 duration: 0.6,
-                ease: "power2.out",
+                ease: 'power2.out',
                 onComplete: () => {
-                    gsap.to(weatherSummaryImg, {
-                        scale: 1,
-                        duration: 0.6,
-                        ease: "power2.out"
-                    });
+                    gsap.to(weatherSummaryImg, { scale: 1, duration: 0.6, ease: 'power2.out' })
                 }
             }
-        );
-    };
-
-    currentDate.textContent = getCurrentDate()
+        )
+    }
     weatherSummaryImg.src = `/${getWeatherIcon(id)}`
 
-    await updateForecastsInfo(city)
-    showDisplaySection(weatherInfoSection, weatherInfoSection2);
+    if (forecastsData) {
+        updateForecastsInfo(forecastsData)
+    }
+
+    showDisplaySection(weatherInfoSection, weatherInfoSection2)
 }
 
-async function updateForecastsInfo(city) {
-    const forecastsData = await getFetchData('forecast', city)
-    
+// Accepts already-fetched data instead of re-fetching
+function updateForecastsInfo(forecastsData) {
     const timeTaken = '12:00:00'
     const todayDate = new Date().toISOString().split('T')[0]
-    
+
     forecastItems.innerHTML = ''
     forecastsData.list.forEach(forecastWeather => {
-        if (forecastWeather.dt_txt.includes(timeTaken) &&
-            !forecastWeather.dt_txt.includes(todayDate)) {
+        if (
+            forecastWeather.dt_txt.includes(timeTaken) &&
+            !forecastWeather.dt_txt.includes(todayDate)
+        ) {
             updateForecastItems(forecastWeather)
         }
     })
 }
 
 function updateForecastItems(weatherData) {
-    console.log(weatherData)
     const {
         dt_txt: date,
         weather: [{ id }],
         main: { temp }
     } = weatherData
 
-    const dateTaken = new Date(date)
-    const dateOption = {
+    const dateResult = new Date(date).toLocaleDateString('en-US', {
         day: '2-digit',
         month: 'short'
-    }
-    const dateResult = dateTaken.toLocaleDateString('en-US', dateOption)
+    })
 
     const forecastItem = `
-    <div class="bg-light bg-opacity-10 rounded-4 d-flex flex-column align-items-center justify-content-center p-3">
-        <p class="m-0 fw-lighter card-date-1">${dateResult}</p>
-        <img src="/${getWeatherIcon(id)}" alt="storm with heavy rain icon" width="65" class="py-1">
-        <p class="m-0 card-temp-1">${Math.round(temp)} °C</p>
-    </div>
-    `
+    <div class="forecast-card">
+        <p class="forecast-date">${dateResult}</p>
+        <img src="/${getWeatherIcon(id)}" alt="weather icon" width="55" loading="lazy">
+        <p class="forecast-temp">${Math.round(temp)} °C</p>
+    </div>`
+
     forecastItems.insertAdjacentHTML('beforeend', forecastItem)
-    
 }
 
 function showForecastPopupAnimation() {
-    const forecastImages = document.querySelectorAll('.forecast-list img');
-    let loadedCount = 0;
+    const forecastImages = document.querySelectorAll('.forecast-list img')
+    const total = forecastImages.length
+    if (total === 0) return
 
-    forecastImages.forEach((img) => {
-        img.onload = () => {
-            loadedCount++;
+    let loadedCount = 0
 
-            if (loadedCount === forecastImages.length) {
-                gsap.fromTo(
-                    forecastImages,
-                    { opacity: 0 },
-                    {
-                        opacity: 1,
-                        duration: 0.5,
-                        ease: 'back.out(1.7)',
-                        stagger: 0.15,
-                    }
-                );
-            }
-        };
-    });
+    const onImageLoad = () => {
+        loadedCount++
+        if (loadedCount === total) {
+            gsap.fromTo(
+                forecastImages,
+                { opacity: 0 },
+                { opacity: 1, duration: 0.5, ease: 'back.out(1.7)', stagger: 0.15 }
+            )
+        }
+    }
+
+    forecastImages.forEach(img => {
+        if (img.complete) {
+            onImageLoad()
+        } else {
+            img.onload = onImageLoad
+            img.onerror = onImageLoad  // count errors so animation isn't stuck
+        }
+    })
 }
 
 function showDisplaySection(...sectionsToDisplay) {
     [weatherInfoSection, weatherInfoSection2, searchCitySection, notFoundSection].forEach(section => {
-        section.style.setProperty('display', 'none', 'important');
-    });
+        section.style.setProperty('display', 'none', 'important')
+    })
 
-    const searchCol = document.querySelector('.search-col');
+    const searchCol = document.querySelector('.search-col')
     if (searchCol) {
-        searchCol.style.setProperty('display', 'none', 'important');
+        searchCol.style.setProperty('display', 'none', 'important')
     }
 
     sectionsToDisplay.forEach(section => {
-        section.style.setProperty('display', 'block', 'important');
-        if (section === weatherInfoSection2) {
-            if (searchCol) {
-                searchCol.style.setProperty('display', 'block', 'important');
-            }
+        section.style.setProperty('display', 'block', 'important')
+        if (section === weatherInfoSection2 && searchCol) {
+            searchCol.style.setProperty('display', 'block', 'important')
         }
-    });
+    })
 
     if (sectionsToDisplay.includes(weatherInfoSection2)) {
-        showForecastPopupAnimation();
+        showForecastPopupAnimation()
     }
-};
+}
 //END SEARCH BUTTON

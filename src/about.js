@@ -1,68 +1,58 @@
 import './style.scss'
 import 'bootstrap';
 
-// // START BACKGROUND
-document.addEventListener('DOMContentLoaded', () => {
-  const interBubble = document.querySelector('.interactive');
-  let curX = 0;
-  let curY = 0;
-  let tgX = 0;
-  let tgY = 0;
-
-  function move() {
-      curX += (tgX - curX) / 20;
-      curY += (tgY - curY) / 20;
-      interBubble.style.transform = `translate(${Math.round(curX)}px, ${Math.round(curY)}px)`;
-      requestAnimationFrame(() => {
-          move();
-      });
-  }
-
-  window.addEventListener('mousemove', (event) => {
-      tgX = event.clientX;
-      tgY = event.clientY;
-  });
-
-  move();
-});
-// END BACKGROUND
-
 const feedbackBtn = document.querySelector('.feedbackBtn')
 const popUp = document.querySelector('.pop-up')
-const closeForm = document.querySelector('.close')
+const closeForm = document.querySelector('.close-btn')
 const form = document.getElementById('form');
 const result = document.getElementById('result');
 
 function loadHcaptcha() {
-  if (window.hcaptcha) {
-    console.log("Hcaptcha loaded successfully");
-    return;
-  }
-
+  if (window.hcaptcha) return;
   const script = document.createElement('script');
   script.src = 'https://web3forms.com/client/script.js';
   script.defer = true;
-
-  script.onload = () => {
-        console.log("hCaptcha widget has been rendered.");
-    };
   document.body.appendChild(script);
 }
 
+function showStatus(type, message) {
+  const icons = {
+    loading: `<span class="status-spinner"></span>`,
+    success: `<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>`,
+    error: `<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>`,
+  };
+  result.style.opacity = '1';
+  result.innerHTML = `<div class="form-status form-status--${type}">${icons[type]}${message}</div>`;
+}
+
+function fadeOutStatus(delay = 3000) {
+  setTimeout(() => {
+    result.style.opacity = '0';
+    setTimeout(() => {
+      result.innerHTML = '';
+      result.style.opacity = '1';
+    }, 400);
+  }, delay);
+}
+
+function resetPopup() {
+  form.reset();
+  result.innerHTML = '';
+  result.style.opacity = '1';
+  if (window.hcaptcha) hcaptcha.reset();
+  popUp.style.display = 'none';
+}
+
 //START CLOSE
-feedbackBtn.addEventListener("click", function() {
-    loadHcaptcha();
-    popUp.style.display = "flex";
-    popUp.scrollIntoView({ behavior: "smooth", block: "center" });
-})
-closeForm.addEventListener("click", function() {
-    form.reset();
-    result.innerHTML = "";
-    if (window.hcaptcha) {
-      hcaptcha.reset();
-    }
-    popUp.style.display = "none";
-  });
+feedbackBtn.addEventListener('click', function () {
+  loadHcaptcha();
+  popUp.style.display = 'flex';
+  popUp.scrollIntoView({ behavior: 'smooth', block: 'center' });
+});
+
+closeForm.addEventListener('click', function () {
+  resetPopup();
+});
 //END CLOSE
 
 //START FORM FUNCTION
@@ -72,30 +62,31 @@ form.addEventListener('submit', async function (e) {
   const object = Object.fromEntries(formData);
   const json = JSON.stringify(object);
 
-  result.style.display = "block";
-  result.innerHTML = `<div class="alert alert-info">Submitting...</div>`;
+  showStatus('loading', 'Sending your feedback...');
 
   try {
-      const response = await fetch('https://api.web3forms.com/submit', {
-          method: 'POST',
-          headers: {
-              'Content-Type': 'application/json',
-              'Accept': 'application/json'
-          },
-          body: json
-      });
+    const response = await fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: json
+    });
 
-      if (response.status === 200) {
-          result.innerHTML = `<div class="alert alert-success">Form successfully submitted!</div>`;
-      } else {
-          result.innerHTML = `<div class="alert alert-danger">Please verify that you are not a robot.</div>`;
-      }
-      } finally {
-        form.reset();
-
-        if (window.hcaptcha) {
-        hcaptcha.reset();
-        }
-      }     
+    if (response.status === 200) {
+      showStatus('success', 'Feedback sent! Thank you.');
+      form.reset();
+      if (window.hcaptcha) hcaptcha.reset();
+      // Close the modal after 3 seconds
+      setTimeout(() => resetPopup(), 3000);
+    } else {
+      showStatus('error', 'Please complete the captcha and try again.');
+      fadeOutStatus(3000);
+    }
+  } catch {
+    showStatus('error', 'Something went wrong. Please try again.');
+    fadeOutStatus(3000);
+  }
 });
 //END FORM FUNCTION

@@ -3,49 +3,137 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/weather-favicon.svg" />
-    <meta name="description" content="Learn about Weather Forecast, a website offering real-time weather updates, 5-day forecasts, and detailed weather data for locations worldwide." />
-    <meta name="keywords" content="weather forecast, about weather, real-time weather, future weather updates, global weather data" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=Poppins:wght@500;600;700&display=swap"
+    />
+    <meta
+      name="description"
+      content="Learn about Weather Forecast, a website offering real-time weather updates, 5-day forecasts, and detailed weather data for locations worldwide."
+    />
+    <meta
+      name="keywords"
+      content="weather forecast, about weather, real-time weather, future weather updates, global weather data"
+    />
     <meta name="robots" content="index, follow" />
-    <meta property="og:title" content="About Weather Forecast - Real-Time Weather Updates">
-    <meta property="og:description" content="Learn about Weather Forecast, a website offering real-time weather updates, 5-day forecasts, and detailed weather data for cities worldwide.">
-    <meta property="og:url" content="https://weather-forecast-dave.vercel.app/about.html">
-    <meta property="og:image" content="public/weather-logo.png" />
+    <meta
+      property="og:title"
+      content="About Weather Forecast - Real-Time Weather Updates"
+    />
+    <meta
+      property="og:description"
+      content="Learn about Weather Forecast, a website offering real-time weather updates, 5-day forecasts, and detailed weather data for cities worldwide."
+    />
+    <meta
+      property="og:url"
+      content="https://weather-forecast-dave.vercel.app/about.html"
+    />
+    <meta
+      property="og:image"
+      content="https://weather-forecast-dave.vercel.app/weather-logo.png"
+    />
     <meta property="og:type" content="website" />
-    <link rel="canonical" href="https://weather-forecast-dave.vercel.app/about.html" />
+    <meta name="twitter:card" content="summary" />
+    <meta
+      name="twitter:title"
+      content="About Weather Forecast - Real-Time Weather Updates"
+    />
+    <meta
+      name="twitter:description"
+      content="Learn about Weather Forecast, a website offering real-time weather updates, 5-day forecasts, and detailed weather data for cities worldwide."
+    />
+    <meta
+      name="twitter:image"
+      content="https://weather-forecast-dave.vercel.app/weather-logo.png"
+    />
+    <meta name="author" content="Dave" />
+    <link
+      rel="canonical"
+      href="https://weather-forecast-dave.vercel.app/about.html"
+    />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>About Weather Forecast - Real-Time Weather Updates</title>
 
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "WebPage",
+        "@type": "AboutPage",
         "name": "About Weather Forecast",
         "description": "Learn about Weather Forecast, a website offering real-time weather updates, 5-day forecasts, and detailed weather data for locations worldwide.",
         "url": "https://weather-forecast-dave.vercel.app/about.html",
-        "mainEntityOfPage": "https://weather-forecast-dave.vercel.app/about.html"
+        "author": {
+          "@type": "Person",
+          "name": "Dave"
+        },
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://weather-forecast-dave.vercel.app/about.html"
+        }
       }
     </script>
-
   </head>
   <body>
     <!-- START HEADER -->
     <header>
-      <nav class="navbar navbar-expand-sm sticky-top bg-light bg-opacity-25 py-1" aria-label="Main Navigation">
+      <nav class="navbar navbar-expand-md py-2" aria-label="Main Navigation">
         <div class="container-fluid">
           <a class="navbar-brand" href="./">
-            <img src="public/weather-logo.png" alt="Weather Forecast Logo" width="30" class="d-inline-block align-middle pb-1">
-            <span class="text-white fw-light fs-6 px-2">Weather Forecast</span>
+            <img
+              src="/weather-logo.png"
+              alt="Weather Forecast Logo"
+              width="30"
+              class="d-inline-block align-middle pb-1"
+            />
+            <span class="fw-light fs-6 px-2">Weather Forecast</span>
           </a>
-          <button class="navbar-toggler border border-light text-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarText"
+            aria-controls="navbarText"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse flex-grow-0" id="navbarText">
-            <ul class="navbar-nav me-auto mb-0 align-items-center">
-              <li class="nav-item px-2">
-                <a class="nav-link text-white fw-light fs-6" href="about.html">About</a>
+            <ul class="navbar-nav me-auto mb-0 align-items-center gap-1">
+              <li class="nav-item">
+                <a class="nav-link fw-light fs-6" href="about.html">About</a>
               </li>
-              <li class="nav-item px-2">
-                <a class="nav-link text-white fw-light fs-6" aria-current="page" href="https://github.com/BuffDave/Weather-Forecast" target="_blank" rel="noopener">Github</a>
+              <li class="nav-item">
+                <a
+                  class="nav-link fw-light fs-6"
+                  href="https://buffDave.github.io"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >Portfolio</a
+                >
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link nav-github"
+                  aria-label="GitHub repository"
+                  href="https://github.com/BuffDave/Weather-Forecast"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="22"
+                    height="22"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577v-2.165c-3.338.726-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.757-1.333-1.757-1.089-.745.083-.729.083-.729 1.205.085 1.84 1.237 1.84 1.237 1.07 1.834 2.807 1.304 3.492.997.108-.775.418-1.305.762-1.605-2.665-.305-5.467-1.332-5.467-5.93 0-1.31.468-2.381 1.236-3.221-.124-.303-.535-1.523.117-3.176 0 0 1.008-.322 3.3 1.23a11.5 11.5 0 0 1 3.003-.404c1.02.005 2.047.138 3.003.404 2.29-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.873.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.61-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .322.218.694.825.576C20.565 21.796 24 17.298 24 12c0-6.63-5.37-12-12-12z"
+                    />
+                  </svg>
+                </a>
               </li>
             </ul>
           </div>
@@ -56,103 +144,164 @@
 
     <!-- START MAIN -->
     <main>
-      <!-- START BACKGROUND -->
-      <section>
-        <div class="gradient-bg">
-          <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <defs>
-              <filter id="goo">
-                <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
-                <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -8" result="goo" />
-                <feBlend in="SourceGraphic" in2="goo" />
-              </filter>
-            </defs>
-          </svg>
-          <div class="gradients-container">
-            <div class="g1"></div>
-            <div class="g2"></div>
-            <div class="g3"></div>
-            <div class="g4"></div>
-            <div class="g5"></div>
-            <div class="interactive"></div>
-          </div>
-        </div>
-      </section>
-      <!-- END BACKGROUND -->
-
       <section aria-labelledby="about-weather">
         <div class="container weather-interface">
           <div class="content py-md-4 px-md-5 py-3 px-4 mb-2">
             <div class="row justify-content-center">
               <div class="col">
                 <div>
-                  <h1 class="text-white">About Weather Forecast</h1>
-                  <p class="text-white">A user-friendly weather forecast website that provides real-time and future weather updates for locations worldwide. This project utilizes modern web development tools and APIs to deliver accurate and dynamic weather data.</p>
+                  <h1>About Weather Forecast</h1>
+                  <p>
+                    A user-friendly weather forecast website that provides
+                    real-time and future weather updates for locations
+                    worldwide. This project utilizes modern web development
+                    tools and APIs to deliver accurate and dynamic weather data.
+                  </p>
                 </div>
                 <div>
-                  <h2 class="text-white">Features</h2>
-                  <ul class="text-white">
+                  <h2>Features</h2>
+                  <ul>
                     <li>
-                      <p class="m-0">Current Weather: <span class="fw-light">View up-to-date temperature, humidity, wind speed, and more.</span></p>
+                      <p class="m-0">
+                        Current Weather:
+                        <span class="fw-light"
+                          >View up-to-date temperature, humidity, wind speed,
+                          and more.</span
+                        >
+                      </p>
                     </li>
                     <li>
-                      <p class="m-0">5-Day Forecast: <span class="fw-light">Check detailed weather predictions for the next five days.</span></p>
+                      <p class="m-0">
+                        5-Day Forecast:
+                        <span class="fw-light"
+                          >Check detailed weather predictions for the next five
+                          days.</span
+                        >
+                      </p>
                     </li>
                     <li>
-                      <p class="m-0">Search Locations: <span class="fw-light">Easily search for cities or locations around the world.</span></p>
+                      <p class="m-0">
+                        Search Locations:
+                        <span class="fw-light"
+                          >Easily search for cities or locations around the
+                          world.</span
+                        >
+                      </p>
                     </li>
                     <li>
-                      <p class="m-0">Responsive Design: <span class="fw-light">Optimized for use on desktop, tablet, and mobile devices.</span></p>
+                      <p class="m-0">
+                        Responsive Design:
+                        <span class="fw-light"
+                          >Optimized for use on desktop, tablet, and mobile
+                          devices.</span
+                        >
+                      </p>
                     </li>
                     <li>
-                      <p class="m-0">Dynamic Weather Icons: <span class="fw-light">Icons and visuals that reflect real-time conditions.</span></p>
+                      <p class="m-0">
+                        Dynamic Weather Icons:
+                        <span class="fw-light"
+                          >Icons and visuals that reflect real-time
+                          conditions.</span
+                        >
+                      </p>
                     </li>
                   </ul>
                 </div>
-                <div class="text-center">
-                  <button type="button" class="feedbackBtn btn btn-outline-light fs-5 border-2">Feedback</button>
+                <div class="text-center mt-3">
+                  <button type="button" class="feedbackBtn feedback-btn">
+                    Leave Feedback
+                  </button>
                 </div>
               </div>
             </div>
           </div>
         </div>
         <div class="pop-up">
-          <div class="popup-content d-flex justify-content-center bg-light border border-secondary">
-            <div class="position-absolute top-0 end-0">
-              <button type="button" class="close btn btn-outline-secondary m-2 py-1 px-2 rounded-5" style="font-size: 10px;" aria-label="Close Feedback Form">X</button>
+          <div class="popup-content">
+            <div
+              class="popup-header d-flex justify-content-between align-items-center"
+            >
+              <div>
+                <h5 class="m-0 fw-semibold">Send Feedback</h5>
+                <p class="m-0 text-muted" style="font-size: 0.82rem">
+                  We'd love to hear from you
+                </p>
+              </div>
+              <button
+                type="button"
+                class="close-btn"
+                aria-label="Close Feedback Form"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <line x1="18" y1="6" x2="6" y2="18" />
+                  <line x1="6" y1="6" x2="18" y2="18" />
+                </svg>
+              </button>
             </div>
             <form method="POST" id="form">
-              <input type="hidden" name="access_key" value="%VITE_API_FORM%"/>
+              <input type="hidden" name="access_key" value="%VITE_API_FORM%" />
 
               <div class="mb-3">
-                <label for="name" class="form-label">Full Name</label>
-                <input type="text" name="name" class="form-control" id="name" required>
-              </div>
-            
-              <div class="mb-3">
-                <label for="email" class="form-label">Email address</label>
-                <input type="email" name="email" class="form-control" id="email" required>
-              </div>
-            
-              <div class="mb-3">
-                <label for="message" class="form-label">Message</label>
-                <textarea class="form-control" name="message" id="message" rows="3" required></textarea>
+                <label for="name" class="feedback-label">Full Name</label>
+                <input
+                  type="text"
+                  name="name"
+                  class="feedback-input"
+                  id="name"
+                  placeholder="John Doe"
+                  required
+                />
               </div>
 
-              <div class="h-captcha pb-2" data-captcha="true" required></div>
+              <div class="mb-3">
+                <label for="email" class="feedback-label">Email address</label>
+                <input
+                  type="email"
+                  name="email"
+                  class="feedback-input"
+                  id="email"
+                  placeholder="john@example.com"
+                  required
+                />
+              </div>
 
-              <div id="result"></div>
-              <button type="submit" class="btn btn-primary mt-2">Submit</button>
+              <div class="mb-3">
+                <label for="message" class="feedback-label">Message</label>
+                <textarea
+                  class="feedback-input"
+                  name="message"
+                  id="message"
+                  rows="4"
+                  placeholder="Tell us what you think..."
+                  required
+                ></textarea>
+              </div>
+
+              <div class="h-captcha pb-3" data-captcha="true" required></div>
+
+              <div id="result" class="mb-2"></div>
+              <button type="submit" class="feedback-submit w-100">
+                Submit Feedback
+              </button>
             </form>
           </div>
         </div>
       </section>
-
     </main>
     <!-- END MAIN -->
 
     <!-- START SCRIPT -->
     <script defer type="module" src="src/about.js"></script>
-
   </body>
 </html>
