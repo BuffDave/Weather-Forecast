@@ -196,16 +196,17 @@ header {
 }
 
 .weather-interface {
-  width: 60%;
+  width: 100%;
+  max-width: 900px;
   margin: 0 auto;
   padding-top: 28px;
 
   @media screen and (max-width: $large) {
-    width: 92%;
+    max-width: 900px;
   }
 
   @media screen and (max-width: 576px) {
-    width: 100%;
+    max-width: none;
     padding: 12px 12px 0;
   }
 }
