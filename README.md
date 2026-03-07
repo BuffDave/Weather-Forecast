@@ -2,11 +2,7 @@
 
 A user-friendly weather forecast website that provides real-time and future weather updates for locations worldwide. This project utilizes modern web development tools and APIs to deliver accurate and dynamic weather data.
 
----
-
-## Live
-
-- [weather-forecast-dave.vercel.app](https://weather-forecast-dave.vercel.app/)
+## [Live](https://weather-forecast-dave.vercel.app/)
 
 ---
 
